@@ -1,38 +1,42 @@
 #!/usr/bin/env bash
 
-sleep 0.3
+# Small delay to allow session initialization
+sleep 0.5
 
-# DBUS
+### DBUS
 if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
-    echo "Not Found D-Bus session, Running dbus-launch..."
     eval "$(dbus-launch --sh-syntax --exit-with-session)"
 fi
 
-# Kill old instances
-pkill -x dunst
-pkill -x polybar
-pkill -x sxhkd
+### CURSOR
+xsetroot -cursor_name left_ptr &
 
-while pgrep -u "$UID" -x polybar >/dev/null; do sleep 1; done
-while pgrep -u "$UID" -x dunst >/dev/null; do sleep 1; done
+### HOTKEY
+pgrep -x sxhkd >/dev/null || sxhkd &
 
-# Wallpaper
-feh --bg-fill "$HOME/.config/bspwm/wallpaper/Void-1.jpg" &
+### WALLPAPER
+pgrep -x feh >/dev/null || \
+feh --no-fehbg --bg-fill "$HOME/.config/bspwm/wallpaper/Sinon-3.jpg" &
 
-# Start sxhkd properly
-sxhkd &
+### NOTIFICATION
+pgrep -x dunst >/dev/null || dunst &
 
-# Polybar
-~/.config/polybar/launch.sh &
+### POLKIT
+pgrep -x polkit-gnome-authentication-agent-1 >/dev/null || \
+/usr/libexec/polkit-gnome-authentication-agent-1 &
 
-# Picom
-~/.config/picom/auto.sh &
+### AUDIO fallback
+(
+sleep 1
+pgrep -x pipewire >/dev/null || pipewire
+pgrep -x wireplumber >/dev/null || wireplumber
+) &
 
-# Dunst
-dunst &
+### COMPOSITOR
+pgrep -x picom >/dev/null || ~/.config/picom/auto.sh &
 
-# Polkit
-polkit-gnome-authentication-agent-1 &
+### BAR
+pgrep -x polybar >/dev/null || ~/.config/polybar/launch.sh &
 
-# Monitor hotplug
-~/.config/sxhkd/scripts/monitor &
+### MONITOR HOTPLUG
+pgrep -f monitor >/dev/null || ~/.config/sxhkd/scripts/monitor &

@@ -305,6 +305,24 @@ polkit.addRule(function(action, subject) {
     }
 });
 EOF
+    sudo tee /etc/polkit-1/rules.d/50-networkmanager.rules >/dev/null << 'EOF'
+polkit.addRule(function(action, subject) {
+    if (subject.isInGroup("wheel")) {
+
+        var allowed = [
+            "org.freedesktop.NetworkManager.enable-disable-network",
+            "org.freedesktop.NetworkManager.enable-disable-wifi",
+            "org.freedesktop.NetworkManager.enable-disable-wwan",
+            "org.freedesktop.NetworkManager.network-control",
+            "org.freedesktop.NetworkManager.settings.modify.system"
+        ];
+
+        if (allowed.indexOf(action.id) >= 0) {
+            return polkit.Result.YES;
+        }
+    }
+});
+EOF
 
     # Groups
     sudo usermod -a -G audio,video,input,disk,wheel "$USER"
