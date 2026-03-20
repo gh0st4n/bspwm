@@ -1,95 +1,48 @@
 #!/usr/bin/env bash
-# volume-minimal.sh - Simple PipeWire volume control
 
-# Settings
-volume_step=5
-max_volume=150
+bar() {
+    percent=$1
+    length=20
 
-# Detect audio system
-if command -v wpctl >/dev/null 2>&1; then
-    # PipeWire
-    get_volume() {
-        wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -oE '[0-9]+\.[0-9]+' | head -1 | \
-        awk '{print int($1 * 100)}'
-    }
-    
-    set_volume() {
-        wpctl set-volume @DEFAULT_AUDIO_SINK@ "$(echo "scale=2; $1 / 100" | bc)"
-    }
-    
-    toggle_mute() {
-        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-    }
-    
-    get_mute() {
-        wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q "MUTED" && echo "yes" || echo "no"
-    }
-else
-    # PulseAudio fallback
-    get_volume() {
-        pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '[0-9]{1,3}(?=%)' | head -1
-    }
-    
-    set_volume() {
-        pactl set-sink-volume @DEFAULT_SINK@ "$1%"
-    }
-    
-    toggle_mute() {
-        pactl set-sink-mute @DEFAULT_SINK@ toggle
-    }
-    
-    get_mute() {
-        pactl get-sink-mute @DEFAULT_SINK@ | grep -Po '(?<=Mute: )(yes|no)'
-    }
-fi
+    # Clamp biar aman
+    [ "$percent" -gt 100 ] && percent=100
+    [ "$percent" -lt 0 ] && percent=0
 
-# Show notification
-show_notif() {
-    local vol=$(get_volume)
-    local mute=$(get_mute)
-    
-    if [ "$mute" = "yes" ]; then
-        icon="🔇"
-        text="Muted"
-    elif [ "$vol" -eq 0 ]; then
-        icon="🔇"
-        text="$vol%"
-    elif [ "$vol" -lt 30 ]; then
-        icon="🔈"
-        text="$vol%"
-    elif [ "$vol" -lt 70 ]; then
-        icon="🔉"
-        text="$vol%"
-    else
-        icon="🔊"
-        text="$vol%"
-    fi
-    
-    notify-send -t 1000 "Volume" "$icon $text" -h string:x-canonical-private-synchronous:volume
+    filled=$(( percent * length / 100 ))
+    empty=$(( length - filled ))
+
+    bar=""
+    space=""
+
+    [ "$filled" -gt 0 ] && bar=$(printf "%0.s=" $(seq 1 $filled))
+    [ "$empty" -gt 0 ] && space=$(printf "%0.s-" $(seq 1 $empty))
+
+    echo "$bar$space"
 }
 
-# Handle commands
 case "$1" in
+    mute)
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+        ;;
     up)
-        vol=$(get_volume)
-        new_vol=$((vol + volume_step))
-        [ "$new_vol" -gt "$max_volume" ] && new_vol=$max_volume
-        set_volume "$new_vol"
-        show_notif
+        wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+
         ;;
     down)
-        vol=$(get_volume)
-        new_vol=$((vol - volume_step))
-        [ "$new_vol" -lt 0 ] && new_vol=0
-        set_volume "$new_vol"
-        show_notif
-        ;;
-    mute)
-        toggle_mute
-        show_notif
-        ;;
-    *)
-        echo "Usage: $0 {up|down|mute}"
-        exit 1
+        wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-
         ;;
 esac
+
+# Poll sampai value update (max ~0.1s)
+for i in {1..5}; do
+    VOL_INFO=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+    sleep 0.02
+done
+
+PERCENT=$(echo "$VOL_INFO" | awk '{print int($2 * 100)}')
+BAR=$(bar $PERCENT)
+
+if echo "$VOL_INFO" | grep -q MUTED; then
+    notify-send -t 1000 -r 999 "Muted" "····+!+····"
+else
+    notify-send -t 1000 -r 999 "Volume: $PERCENT%" "$BAR"
+fi
