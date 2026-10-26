@@ -4,9 +4,8 @@
 sleep 0.5
 
 ### DBUS
-if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
-    eval "$(dbus-launch --sh-syntax --exit-with-session)"
-fi
+# [DIHAPUS] Biarkan LightDM atau startx yang mengatur D-Bus. 
+# Menggunakan dbus-launch di sini akan membuat bus di /tmp yang bermasalah.
 
 ### CURSOR
 xsetroot -cursor_name left_ptr &
@@ -25,17 +24,24 @@ pgrep -x dunst >/dev/null || dunst &
 pgrep -x polkit-gnome-authentication-agent-1 >/dev/null || \
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 
-### AUDIO
-(
-sleep 1
-pkill -x wireplumber 2>/dev/null
-pkill -x pipewire-pulse 2>/dev/null
+### AUDIO (DIPERBAIKI)
+# Bersihkan instance lama (mencegah double spawn saat bspwm restart)
 pkill -x pipewire 2>/dev/null
-sleep 0.5
+pkill -x pipewire-pulse 2>/dev/null
+pkill -x wireplumber 2>/dev/null
+sleep 0.3
+
+# Jalankan PipeWire dulu
 pipewire &
-pipewire-pulse &
+# Tunggu socket PipeWire muncul (maksimal 3 detik)
+for i in {1..30}; do
+    [ -S "$XDG_RUNTIME_DIR/pipewire-0" ] && break
+    sleep 0.1
+done
+
+# Baru jalankan WirePlumber dan PipeWire-Pulse
 wireplumber &
-) &
+pipewire-pulse &
 
 ### COMPOSITOR
 pgrep -x picom >/dev/null || ~/.config/picom/auto.sh &

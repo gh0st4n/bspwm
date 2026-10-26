@@ -519,41 +519,59 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
-
 setup_dbus() {
-    info "Configuring D-Bus..."
+    info "Configuring D-Bus and elogind..."
 
-    if getent group dbus >/dev/null; then
-        if ! groups "$USER" | grep -q dbus; then
-            sudo usermod -a -G dbus "$USER"
-            warn "User added to group 'dbus'. Logout/login required."
-        fi
-    fi
-
-    if [[ -L /var/service/dbus ]]; then
-        sv status dbus | grep -q run \
-            && info "D-Bus service is running." \
-            || sudo sv start dbus
-    else
-        if [[ -d /etc/sv/dbus ]]; then
+    # 1. Enable system D-Bus (System Bus)
+    if [[ -d /etc/sv/dbus ]]; then
+        if [[ ! -L /var/service/dbus ]]; then
             sudo ln -s /etc/sv/dbus /var/service/
-            info "D-Bus service enabled."
+            info "System D-Bus service enabled."
         else
-            error "D-Bus service directory not found. Is dbus installed?"
+            info "System D-Bus service already enabled."
         fi
+    else
+        error "D-Bus service directory not found. Is dbus installed?"
     fi
 
-    # dumb-runtime-dir untuk XDG_RUNTIME_DIR
-    if ! command -v dumb_runtime_dir >/dev/null 2>&1; then
-        sudo xbps-install -y dumb_runtime_dir
-    fi
-    if ! grep -q "pam_dumb_runtime_dir" /etc/pam.d/system-login 2>/dev/null; then
-        echo "session optional pam_dumb_runtime_dir.so" | sudo tee -a /etc/pam.d/system-login >/dev/null
+    # 2. Enable elogind (Manages user sessions, /run/user/UID, and PAM)
+    if [[ -d /etc/sv/elogind ]]; then
+        if [[ ! -L /var/service/elogind ]]; then
+            sudo ln -s /etc/sv/elogind /var/service/
+            info "elogind service enabled."
+        else
+            info "elogind service already enabled."
+        fi
+    else
+        error "elogind service directory not found. Is elogind installed?"
     fi
 
-    success "D-Bus configuration complete. (Remember: logout/login!)"
+    # 3. Pastikan pam_elogind.so ada di system-login (Penting untuk XDG_RUNTIME_DIR)
+    # Paket elogind biasanya sudah menambahkan ini, tapi kita pastikan secara eksplisit.
+    if ! grep -q "pam_elogind.so" /etc/pam.d/system-login 2>/dev/null; then
+        echo "session optional pam_elogind.so" | sudo tee -a /etc/pam.d/system-login >/dev/null
+        info "pam_elogind.so added to /etc/pam.d/system-login."
+    else
+        info "pam_elogind.so already configured in PAM."
+    fi
+
+    # 4. Bersihkan modul runtime dir lama/konflik jika ada
+    if grep -q "pam_dumb_runtime_dir" /etc/pam.d/system-login 2>/dev/null; then
+        sudo sed -i '/pam_dumb_runtime_dir/d' /etc/pam.d/system-login
+        warn "Removed pam_dumb_runtime_dir (elogind handles XDG_RUNTIME_DIR now)."
+    fi
+    
+    # Hapus paket dumb_runtime_dir jika terlanjur terinstal agar sistem bersih
+    if xbps-query dumb_runtime_dir >/dev/null 2>&1; then
+        sudo xbps-remove -y dumb_runtime_dir >/dev/null 2>&1 || true
+        info "Removed obsolete dumb_runtime_dir package."
+    fi
+
+    # Catatan: Menambahkan user ke grup 'dbus' TIDAK DIPERLUKAN untuk session bus desktop.
+    # Session bus dikelola oleh dbus-daemon --session yang di-spawn saat login.
+
+    success "D-Bus and elogind configuration complete. (Remember: logout/login!)"
 }
-
 # ---------------------------------------------------------------------------
 
 create_user_dirs() {
@@ -567,39 +585,35 @@ create_user_dirs() {
 }
 
 # ---------------------------------------------------------------------------
-
 setup_pipewire() {
     info "Configuring PipeWire..."
-    mkdir -p "$CONFIG_DIR/pipewire/pipewire.conf.d"
-
-    [[ -f /usr/share/examples/wireplumber/10-wireplumber.conf ]] && \
-        ln -sf /usr/share/examples/wireplumber/10-wireplumber.conf \
-               "$CONFIG_DIR/pipewire/pipewire.conf.d/"
-    [[ -f /usr/share/examples/pipewire/20-pipewire-pulse.conf ]] && \
-        ln -sf /usr/share/examples/pipewire/20-pipewire-pulse.conf \
-               "$CONFIG_DIR/pipewire/pipewire.conf.d/"
-
+    
+    # [DIHAPUS] Tidak perlu symlink ke pipewire.conf.d (10-wireplumber & 20-pipewire-pulse).
+    # Karena daemon sudah dijalankan manual via script 00A di bspwm.
+    # Jika ini dibiarkan, akan terjadi double-spawn yang membuat audio error.
+    
+    # Konfigurasi ALSA (TETAP DIPERTAHANKAN agar aplikasi ALSA langsung ke PipeWire)
     if [[ -d /usr/share/alsa/alsa.conf.d ]]; then
         sudo mkdir -p /etc/alsa/conf.d
         sudo ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf         /etc/alsa/conf.d/
         sudo ln -sf /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d/
     fi
-
+    
+    # Konfigurasi JACK (TETAP DIPERTAHANKAN)
     if [[ -d /usr/lib/pipewire-0.3/jack ]]; then
         echo "/usr/lib/pipewire-0.3/jack" | sudo tee /etc/ld.so.conf.d/pipewire-jack.conf >/dev/null
         sudo ldconfig
     fi
-
-    mkdir -p "$CONFIG_DIR/autostart"
-    [[ -f /usr/share/applications/pipewire.desktop ]] && \
-        ln -sf /usr/share/applications/pipewire.desktop       "$CONFIG_DIR/autostart/"
-    [[ -f /usr/share/applications/pipewire-pulse.desktop ]] && \
-        ln -sf /usr/share/applications/pipewire-pulse.desktop "$CONFIG_DIR/autostart/"
-
+    
+    # [DIHAPUS] Symlink ke ~/.config/autostart/
+    # bspwm murni tidak membaca folder autostart kecuali ada tools seperti 'dex'.
+    # Karena kita pakai 00A, symlink ini tidak berguna dan bisa membingungkan.
+    
+    # Pastikan user ada di grup audio dan video
     sudo usermod -a -G audio,video "$USER"
+    
     success "PipeWire configured."
 }
-
 # ---------------------------------------------------------------------------
 
 dotfiles() {
