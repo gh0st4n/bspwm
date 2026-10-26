@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
-
 set -e
-
 # ---------------------------------------------------------------------------
 # Colors & Logging
 # ---------------------------------------------------------------------------
-
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -13,7 +10,6 @@ BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 BOLD='\033[1m'
 NC='\033[0m'
-
 info()    { echo -e "${BLUE}[INFO]${NC} $*"; }
 warn()    { echo -e "${YELLOW}[WARN]${NC} $*"; }
 error()   { echo -e "${RED}[ERROR]${NC} $*" >&2; }
@@ -22,7 +18,6 @@ success() { echo -e "${GREEN}[SUCCESS]${NC} $*"; }
 # ---------------------------------------------------------------------------
 # Root Guard
 # ---------------------------------------------------------------------------
-
 if [[ $EUID -eq 0 ]]; then
     error "Do not run this script as root. Run it as a normal user."
     exit 1
@@ -30,11 +25,8 @@ fi
 
 # ---------------------------------------------------------------------------
 # GPU Flag — Manual Override
-# ./install.sh --intel | --amd | --nvidia
 # ---------------------------------------------------------------------------
-
 GPU_TYPE=""
-
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --intel)  GPU_TYPE="intel"  ;;
@@ -48,7 +40,6 @@ done
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 HOME_DIR="$HOME"
 CONFIG_DIR="$HOME_DIR/.config"
@@ -56,146 +47,44 @@ FONTS_DIR="/usr/share/fonts"
 ICONS_DIR="/usr/share/icons"
 THEMES_DIR="/usr/share/themes"
 WALLPAPER_DIR="/usr/share/t4n-os/wallpaper"
-
 sudo mkdir -p "$FONTS_DIR" "$ICONS_DIR" "$THEMES_DIR" "$WALLPAPER_DIR"
 mkdir -p "$CONFIG_DIR"
 
 # ---------------------------------------------------------------------------
 # Packages
 # ---------------------------------------------------------------------------
-
 PACKAGES_BASE=(
-    # Xorg
-    xorg
-    xf86-input-libinput
-
-    # WM
-    bspwm
-    sxhkd
-
+    # Xorg & WM
+    xorg xf86-input-libinput bspwm sxhkd
     # Graphics Base
-    mesa
-    mesa-dri
-    Vulkan-Tools
-    linux-firmware
-
+    mesa mesa-dri Vulkan-Tools linux-firmware pciutils # [FIX] Tambah pciutils untuk lspci
     # Network
     network-manager-applet
-
     # Terminal & Launcher
-    alacritty
-    rofi
-    dmenu
-
+    alacritty rofi dmenu
     # Panel & Compositor
-    polybar
-    picom
-
+    polybar picom
     # File Manager
-    Thunar
-    gvfs
-    gvfs-mtp
-    thunar-archive-plugin
-    thunar-media-tags-plugin
-    
-    # File Manager Utilities
-    xarchiver
-    zip
-    unzip
-    p7zip
-    unrar
-
+    Thunar gvfs gvfs-mtp thunar-archive-plugin thunar-media-tags-plugin xarchiver zip unzip p7zip unrar
     # Utilities
-    feh
-    dunst
-    brightnessctl
-    xss-lock
-    betterlockscreen
-    i3lock-color
-    ranger
-    xrdb
-    xdg-user-dirs
-    polkit-gnome
-    gparted
-    lightdm-gtk3-greeter
-    ripgrep
-    tree-sitter
-    tree-sitter-cli
-    plymouth
-
+    feh dunst brightnessctl xss-lock betterlockscreen i3lock-color ranger xrdb xdg-user-dirs polkit-gnome gparted lightdm-gtk3-greeter ripgrep tree-sitter tree-sitter-cli plymouth
     # Monitoring
-    lm_sensors
-    htop
-    btop
-    fastfetch
-    playerctl
-    xrandr
-    lazygit
-
+    lm_sensors htop btop fastfetch playerctl xrandr lazygit
     # Apps
-    firefox
-    flameshot
-    galculator
-    geany
-    timeshift
-    xmirror
-    yazi
-
+    firefox flameshot galculator geany timeshift xmirror yazi
     # Other
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
-    lxappearance
-    gtk-engine-murrine
-    fontconfig
-    zramen
-
+    xdg-desktop-portal xdg-desktop-portal-gtk lxappearance gtk-engine-murrine fontconfig zramen
     # Theme
-    arc-theme
-    tint
-    tint2
-
-    # Papirus
-    papirus-folders
-    papirus-icon-theme
-
+    arc-theme tint tint2 papirus-folders papirus-icon-theme
     # Fonts
-    font-awesome
-    font-awesome5
-    font-awesome6
-
-    noto-fonts-cjk
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-sans-variable
-    noto-fonts-cjk-serif
-    noto-fonts-cjk-serif-variable
-    noto-fonts-cjk-variable
-    noto-fonts-emoji
-    noto-fonts-ttf
-    noto-fonts-ttf-extra
-    noto-fonts-ttf-variable
-
-    font-firacode
-    font-sarasa-gothic
+    font-awesome font-awesome5 font-awesome6 noto-fonts-cjk noto-fonts-cjk-sans noto-fonts-cjk-sans-variable noto-fonts-cjk-serif noto-fonts-cjk-serif-variable noto-fonts-cjk-variable noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra noto-fonts-ttf-variable font-firacode font-sarasa-gothic
 )
-
 PACKAGES_PIPEWIRE=(
-    pipewire wireplumber
-    libspa-bluetooth
-    alsa-pipewire
-    libjack-pipewire
-    pavucontrol pamixer
+    pipewire wireplumber libspa-bluetooth alsa-pipewire libjack-pipewire pavucontrol pamixer
 )
-
 PACKAGES_SERVICES=(
-    dbus
-    elogind
-    NetworkManager
-    lightdm
-    rtkit
-    polkit
-    power-profiles-daemon
+    dbus elogind NetworkManager lightdm rtkit polkit power-profiles-daemon
 )
-
 PACKAGES_ALL=(
     "${PACKAGES_BASE[@]}"
     "${PACKAGES_PIPEWIRE[@]}"
@@ -205,15 +94,13 @@ PACKAGES_ALL=(
 # ---------------------------------------------------------------------------
 # Functions
 # ---------------------------------------------------------------------------
-
 install_packages() {
     info "Updating the system and installing packages..."
-
     sudo xbps-install -Su xbps || { error "Failed to update xbps"; exit 1; }
     sudo xbps-install -y void-repo-multilib void-repo-multilib-nonfree void-repo-nonfree 2>/dev/null \
         || warn "Repository mungkin sudah ada."
     sudo xbps-install -Su || { error "Failed to update system"; exit 1; }
-
+    
     for pkg in "${PACKAGES_ALL[@]}"; do
         if ! xbps-query "$pkg" >/dev/null 2>&1; then
             info "Menginstal $pkg..."
@@ -222,23 +109,18 @@ install_packages() {
             info "Package $pkg already installed, skip."
         fi
     done
-
     success "All packages are complete."
 }
 
 # ---------------------------------------------------------------------------
-
 detect_gpu() {
-    # Kalau sudah di-set via flag manual, skip auto-detect
     if [[ -n "$GPU_TYPE" ]]; then
         info "GPU manually set to: $GPU_TYPE"
         return
     fi
-
     info "Auto-detecting GPU..."
     local gpu
     gpu=$(lspci | grep -E "VGA|3D|Display" | tr '[:upper:]' '[:lower:]')
-
     if echo "$gpu" | grep -q "intel"; then
         GPU_TYPE="intel"
     elif echo "$gpu" | grep -q "amd\|radeon"; then
@@ -249,7 +131,6 @@ detect_gpu() {
         GPU_TYPE="unknown"
         warn "GPU not detected, skipping driver install."
     fi
-
     info "GPU detected: $GPU_TYPE"
 }
 
@@ -257,28 +138,19 @@ setup_gpu() {
     case "$GPU_TYPE" in
         intel)
             info "Installing Intel drivers..."
-            sudo xbps-install -y \
-                intel-video-accel \
-                intel-media-driver \
-                libva-utils
+            sudo xbps-install -y intel-video-accel intel-media-driver libva-utils
             success "Intel driver installed."
             ;;
         amd)
             info "Installing AMD drivers..."
-            sudo xbps-install -y \
-                xf86-video-amdgpu \
-                mesa-vaapi \
-                mesa-vdpau
+            sudo xbps-install -y xf86-video-amdgpu mesa-vaapi mesa-vdpau
             success "AMD driver installed."
             ;;
         nvidia)
             info "Installing Nvidia drivers..."
             sudo xbps-install -y void-repo-nonfree
-            sudo xbps-install -Syu
-            sudo xbps-install -y \
-                nvidia \
-                nvidia-libs \
-                nvidia-libs-32bit
+            # [FIX] Hapus xbps-install -Syu yang redundan
+            sudo xbps-install -y nvidia nvidia-libs nvidia-libs-32bit
             success "Nvidia driver installed."
             ;;
         unknown)
@@ -288,89 +160,44 @@ setup_gpu() {
 }
 
 # ---------------------------------------------------------------------------
-# ZRam Setup — Smart Auto-Config + Manual Override
+# ZRam Setup
 # ---------------------------------------------------------------------------
-# Format /etc/sv/zramen/conf (standar komunitas Void Linux):
-#
-#   ZRAM_SIZE=<ukuran>   → e.g. 4G, 8G, 2G
-#   ALGO=<algoritma>     → zstd | lz4 | lzo | lzo-rle
-#
-# zramen membaca file ini saat service start via Runit.
-# ---------------------------------------------------------------------------
-
 _zram_profile() {
-    # $1 = total RAM dalam MB
-    # Output: ZRAM_SIZE  ALGO  SWAPPINESS  label
     local ram_mb="$1"
-
-    if   (( ram_mb >= 16384 )); then
-        # 16 GB+  → Zram 4G, zstd, swappiness sangat rendah
-        echo "4G zstd 10 ≥16GB"
-    elif (( ram_mb >= 8192 )); then
-        # 8 GB–16 GB → Zram 4G, zstd, swappiness rendah
-        echo "4G zstd 20 8-16GB"
-    elif (( ram_mb >= 4096 )); then
-        # 4 GB–8 GB → Zram 2G, zstd, swappiness sedang
-        echo "2G zstd 60 4-8GB"
-    elif (( ram_mb >= 2048 )); then
-        # 2 GB–4 GB → Zram 2G, lz4, swappiness tinggi
-        echo "2G lz4 80 2-4GB"
-    else
-        # < 2 GB → Zram 1G, lz4, swappiness agresif
-        echo "1G lz4 100 <2GB"
+    if   (( ram_mb >= 16384 )); then echo "4G zstd 10 ≥16GB"
+    elif (( ram_mb >= 8192 ));  then echo "4G zstd 20 8-16GB"
+    elif (( ram_mb >= 4096 ));  then echo "2G zstd 60 4-8GB"
+    elif (( ram_mb >= 2048 ));  then echo "2G lz4 80 2-4GB"
+    else                             echo "1G lz4 100 <2GB"
     fi
 }
 
 setup_zram() {
     info "Memulai konfigurasi ZRam..."
-
-    # ── Deteksi RAM ──────────────────────────────────────────────────────────
     local total_ram_kb total_ram_mb
     total_ram_kb=$(grep MemTotal /proc/meminfo | awk '{print $2}')
     total_ram_mb=$(( total_ram_kb / 1024 ))
 
-    # ── Tentukan profil otomatis ─────────────────────────────────────────────
-    local auto_profile
+    local auto_profile auto_size auto_algo auto_swappiness auto_label
     auto_profile=$(_zram_profile "$total_ram_mb")
-    local auto_size auto_algo auto_swappiness auto_label
     read -r auto_size auto_algo auto_swappiness auto_label <<< "$auto_profile"
 
-    # ── Tampilkan info & rekomendasi ─────────────────────────────────────────
     echo ""
     echo -e "${BOLD}${CYAN}┌─────────────────────────────────────────────────┐${NC}"
     echo -e "${BOLD}${CYAN}│           Konfigurasi ZRam — T4n OS            │${NC}"
     echo -e "${BOLD}${CYAN}└─────────────────────────────────────────────────┘${NC}"
     echo -e "  RAM Terdeteksi : ${YELLOW}${total_ram_mb} MB${NC}"
-    echo ""
     echo -e "  ${GREEN}[Rekomendasi Otomatis untuk RAM ${auto_label}]${NC}"
     echo -e "  ┌─────────────────────────────────────┐"
     echo -e "  │  ZRAM_SIZE  = ${CYAN}${auto_size}${NC}"
     echo -e "  │  ALGO       = ${CYAN}${auto_algo}${NC}"
     echo -e "  │  Swappiness = ${CYAN}${auto_swappiness}${NC}"
     echo -e "  └─────────────────────────────────────┘"
-    echo ""
-    echo -e "  ${YELLOW}Tabel Referensi Profil:${NC}"
-    echo -e "  ┌──────────────┬───────────┬──────┬────────────┐"
-    echo -e "  │ RAM          │ ZRAM_SIZE │ ALGO │ Swappiness │"
-    echo -e "  ├──────────────┼───────────┼──────┼────────────┤"
-    echo -e "  │ ≥ 16 GB      │ 4G        │ zstd │ 10         │"
-    echo -e "  │ 8 GB – 16 GB │ 4G        │ zstd │ 20         │"
-    echo -e "  │ 4 GB – 8 GB  │ 2G        │ zstd │ 60         │"
-    echo -e "  │ 2 GB – 4 GB  │ 2G        │ lz4  │ 80         │"
-    echo -e "  │ < 2 GB       │ 1G        │ lz4  │ 100        │"
-    echo -e "  └──────────────┴───────────┴──────┴────────────┘"
-    echo ""
-    echo -e "  ${BLUE}Catatan algoritma:${NC}"
-    echo -e "  • ${CYAN}zstd${NC}  → Rasio kompresi terbaik, CPU sedikit lebih berat   ${GREEN}[Direkomendasikan]${NC}"
-    echo -e "  • ${CYAN}lz4${NC}   → Sangat cepat, cocok RAM kecil / CPU lemah"
-    echo -e "  • ${CYAN}lzo${NC}   → Lama, tidak disarankan kecuali kernel sangat lama"
-    echo ""
-
-    # ── Tanya user: auto atau manual? ───────────────────────────────────────
+    
     local choice
     while true; do
         echo -e "  Pilih mode konfigurasi:"
-        echo -e "  ${GREEN}[1]${NC} Gunakan rekomendasi otomatis (${auto_size} | ${auto_algo} | swappiness=${auto_swappiness})"
+        echo -e "  ${GREEN}[1]${NC} Gunakan rekomendasi otomatis"
         echo -e "  ${YELLOW}[2]${NC} Atur manual"
         echo -n "  Pilihan [1/2]: "
         read -r choice
@@ -381,118 +208,37 @@ setup_zram() {
         esac
     done
 
-    local final_size final_algo final_swappiness
+    local final_size="$auto_size" final_algo="$auto_algo" final_swappiness="$auto_swappiness"
 
-    if [[ "$choice" == "1" || -z "$choice" ]]; then
-        # ── Mode Auto ───────────────────────────────────────────────────────
-        final_size="$auto_size"
-        final_algo="$auto_algo"
-        final_swappiness="$auto_swappiness"
-        info "Menggunakan konfigurasi otomatis."
-
-    else
-        # ── Mode Manual ─────────────────────────────────────────────────────
-        echo ""
-        info "Mode manual. Masukkan konfigurasi ZRam:"
-
-        # Ukuran
-        while true; do
-            echo -n "  ZRAM_SIZE (contoh: 1G, 2G, 4G, 8G) [default: ${auto_size}]: "
-            read -r input_size
-            input_size="${input_size:-$auto_size}"
-            if [[ "$input_size" =~ ^[0-9]+[GgMm]$ ]]; then
-                final_size="${input_size^^}"
-                break
-            else
-                warn "Format tidak valid. Gunakan format seperti: 2G, 4G, 512M"
-            fi
-        done
-
-        # Algoritma
-        while true; do
-            echo ""
-            echo -e "  Pilih algoritma kompresi:"
-            echo -e "  ${GREEN}[1]${NC} zstd   — Kompresi terbaik ${GREEN}[Direkomendasikan]${NC}"
-            echo -e "  ${CYAN}[2]${NC} lz4    — Tercepat, cocok CPU/RAM terbatas"
-            echo -e "  ${YELLOW}[3]${NC} lzo    — Lama, kompatibilitas kernel lama"
-            echo -e "  ${YELLOW}[4]${NC} lzo-rle — Versi lzo yang lebih cepat sedikit"
-            echo -n "  Pilihan [1-4, default: 1]: "
-            read -r input_algo_choice
-            case "${input_algo_choice:-1}" in
-                1) final_algo="zstd"    ; break ;;
-                2) final_algo="lz4"     ; break ;;
-                3) final_algo="lzo"     ; break ;;
-                4) final_algo="lzo-rle" ; break ;;
-                *) warn "Masukkan angka 1-4." ;;
-            esac
-        done
-
-        # Swappiness
-        while true; do
-            echo ""
-            echo -e "  Panduan swappiness:"
-            echo -e "  • ${CYAN}0–20${NC}  : RAM besar (≥8GB), zram jarang dipakai"
-            echo -e "  • ${CYAN}40–70${NC} : RAM menengah (4GB–8GB), seimbang"
-            echo -e "  • ${CYAN}80–100${NC}: RAM kecil (≤4GB), zram aktif agresif"
-            echo -n "  vm.swappiness (0-200) [default: ${auto_swappiness}]: "
-            read -r input_swap
-            input_swap="${input_swap:-$auto_swappiness}"
-            if [[ "$input_swap" =~ ^[0-9]+$ ]] && (( input_swap >= 0 && input_swap <= 200 )); then
-                final_swappiness="$input_swap"
-                break
-            else
-                warn "Nilai harus angka antara 0–200."
-            fi
-        done
+    if [[ "$choice" == "2" ]]; then
+        echo -n "  ZRAM_SIZE [${auto_size}]: "; read -r input_size; final_size="${input_size:-$auto_size}"
+        echo -n "  ALGO (zstd/lz4/lzo) [${auto_algo}]: "; read -r input_algo; final_algo="${input_algo:-$auto_algo}"
+        echo -n "  Swappiness [${auto_swappiness}]: "; read -r input_swap; final_swappiness="${input_swap:-$auto_swappiness}"
     fi
 
-    # ── Ringkasan final ──────────────────────────────────────────────────────
-    echo ""
-    echo -e "  ${GREEN}Konfigurasi yang akan diterapkan:${NC}"
-    echo -e "  ┌─────────────────────────────────────┐"
-    echo -e "  │  ZRAM_SIZE  = ${CYAN}${final_size}${NC}"
-    echo -e "  │  ALGO       = ${CYAN}${final_algo}${NC}"
-    echo -e "  │  Swappiness = ${CYAN}${final_swappiness}${NC}"
-    echo -e "  └─────────────────────────────────────┘"
-    echo ""
-
-    # ── Load modul kernel ────────────────────────────────────────────────────
+    # [FIX] Tambahkan 2>/dev/null agar tidak error jika zram sudah built-in di kernel
     if ! lsmod | grep -q "^zram"; then
-        sudo modprobe zram \
-            && info "Modul zram berhasil dimuat." \
-            || warn "Gagal memuat modul zram."
+        sudo modprobe zram 2>/dev/null && info "Modul zram berhasil dimuat." || warn "Gagal memuat modul zram (mungkin sudah built-in)."
     else
         info "Modul zram sudah aktif."
     fi
 
-    # ── Auto-load modul saat boot ────────────────────────────────────────────
     if ! grep -q "^zram" /etc/modules-load.d/zram.conf 2>/dev/null; then
         echo 'zram' | sudo tee /etc/modules-load.d/zram.conf >/dev/null
-        info "zram dikonfigurasi untuk auto-load saat boot."
     fi
 
-    # ── Aktifkan service zramen via Runit ────────────────────────────────────
     if [[ ! -L /var/service/zramen ]]; then
         sudo ln -s /etc/sv/zramen /var/service/
-        info "Service zramen diaktifkan."
-    else
-        info "Service zramen sudah aktif, skip."
     fi
 
-    # ── Tulis /etc/sv/zramen/conf (standar komunitas Void Linux) ─────────────
     sudo tee /etc/sv/zramen/conf >/dev/null <<EOF
-# ZRam configuration — dibuat otomatis oleh T4n OS installer
-# Format standar komunitas Void Linux untuk zramen
-# Referensi: https://github.com/jedavies-dev/zramen
-
 ZRAM_SIZE=${final_size}
 ALGO=${final_algo}
 EOF
-    info "Konfigurasi ditulis ke /etc/sv/zramen/conf"
 
-    # ── Tuning sysctl ────────────────────────────────────────────────────────
     local sysctl_conf="/etc/sysctl.conf"
-
+    # [FIX] Pastikan file sysctl.conf ada sebelum di-sed
+    sudo touch "$sysctl_conf"
     _sysctl_set() {
         local key="$1" val="$2"
         if grep -q "^${key}" "$sysctl_conf" 2>/dev/null; then
@@ -501,79 +247,40 @@ EOF
             echo "${key}=${val}" | sudo tee -a "$sysctl_conf" >/dev/null
         fi
     }
-
     _sysctl_set "vm.swappiness"             "$final_swappiness"
     _sysctl_set "vm.vfs_cache_pressure"     "50"
     _sysctl_set "vm.dirty_ratio"            "15"
     _sysctl_set "vm.dirty_background_ratio" "5"
-
     sudo sysctl -p >/dev/null
-    info "Sysctl diperbarui."
 
-    # ── Restart service agar konfigurasi baru berlaku ────────────────────────
     if [[ -L /var/service/zramen ]]; then
         sudo sv restart zramen 2>/dev/null || true
     fi
-
     success "ZRam aktif! (${final_size} | ${final_algo} | swappiness=${final_swappiness})"
 }
 
 # ---------------------------------------------------------------------------
 setup_dbus() {
     info "Configuring D-Bus and elogind..."
-
-    # 1. Enable system D-Bus (System Bus)
-    if [[ -d /etc/sv/dbus ]]; then
-        if [[ ! -L /var/service/dbus ]]; then
-            sudo ln -s /etc/sv/dbus /var/service/
-            info "System D-Bus service enabled."
-        else
-            info "System D-Bus service already enabled."
-        fi
-    else
-        error "D-Bus service directory not found. Is dbus installed?"
+    if [[ -d /etc/sv/dbus ]] && [[ ! -L /var/service/dbus ]]; then
+        sudo ln -s /etc/sv/dbus /var/service/
     fi
-
-    # 2. Enable elogind (Manages user sessions, /run/user/UID, and PAM)
-    if [[ -d /etc/sv/elogind ]]; then
-        if [[ ! -L /var/service/elogind ]]; then
-            sudo ln -s /etc/sv/elogind /var/service/
-            info "elogind service enabled."
-        else
-            info "elogind service already enabled."
-        fi
-    else
-        error "elogind service directory not found. Is elogind installed?"
+    if [[ -d /etc/sv/elogind ]] && [[ ! -L /var/service/elogind ]]; then
+        sudo ln -s /etc/sv/elogind /var/service/
     fi
-
-    # 3. Pastikan pam_elogind.so ada di system-login (Penting untuk XDG_RUNTIME_DIR)
-    # Paket elogind biasanya sudah menambahkan ini, tapi kita pastikan secara eksplisit.
     if ! grep -q "pam_elogind.so" /etc/pam.d/system-login 2>/dev/null; then
         echo "session optional pam_elogind.so" | sudo tee -a /etc/pam.d/system-login >/dev/null
-        info "pam_elogind.so added to /etc/pam.d/system-login."
-    else
-        info "pam_elogind.so already configured in PAM."
     fi
-
-    # 4. Bersihkan modul runtime dir lama/konflik jika ada
     if grep -q "pam_dumb_runtime_dir" /etc/pam.d/system-login 2>/dev/null; then
         sudo sed -i '/pam_dumb_runtime_dir/d' /etc/pam.d/system-login
-        warn "Removed pam_dumb_runtime_dir (elogind handles XDG_RUNTIME_DIR now)."
     fi
-    
-    # Hapus paket dumb_runtime_dir jika terlanjur terinstal agar sistem bersih
     if xbps-query dumb_runtime_dir >/dev/null 2>&1; then
         sudo xbps-remove -y dumb_runtime_dir >/dev/null 2>&1 || true
-        info "Removed obsolete dumb_runtime_dir package."
     fi
-
-    # Catatan: Menambahkan user ke grup 'dbus' TIDAK DIPERLUKAN untuk session bus desktop.
-    # Session bus dikelola oleh dbus-daemon --session yang di-spawn saat login.
-
-    success "D-Bus and elogind configuration complete. (Remember: logout/login!)"
+    success "D-Bus and elogind configuration complete."
 }
-# ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
 create_user_dirs() {
     info "Creating standard user directories..."
     if command -v xdg-user-dirs-update >/dev/null 2>&1; then
@@ -587,80 +294,67 @@ create_user_dirs() {
 # ---------------------------------------------------------------------------
 setup_pipewire() {
     info "Configuring PipeWire..."
-    
-    # [DIHAPUS] Tidak perlu symlink ke pipewire.conf.d (10-wireplumber & 20-pipewire-pulse).
-    # Karena daemon sudah dijalankan manual via script 00A di bspwm.
-    # Jika ini dibiarkan, akan terjadi double-spawn yang membuat audio error.
-    
-    # Konfigurasi ALSA (TETAP DIPERTAHANKAN agar aplikasi ALSA langsung ke PipeWire)
     if [[ -d /usr/share/alsa/alsa.conf.d ]]; then
         sudo mkdir -p /etc/alsa/conf.d
         sudo ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf         /etc/alsa/conf.d/
         sudo ln -sf /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d/
     fi
-    
-    # Konfigurasi JACK (TETAP DIPERTAHANKAN)
     if [[ -d /usr/lib/pipewire-0.3/jack ]]; then
         echo "/usr/lib/pipewire-0.3/jack" | sudo tee /etc/ld.so.conf.d/pipewire-jack.conf >/dev/null
         sudo ldconfig
     fi
-    
-    # [DIHAPUS] Symlink ke ~/.config/autostart/
-    # bspwm murni tidak membaca folder autostart kecuali ada tools seperti 'dex'.
-    # Karena kita pakai 00A, symlink ini tidak berguna dan bisa membingungkan.
-    
-    # Pastikan user ada di grup audio dan video
     sudo usermod -a -G audio,video "$USER"
-    
     success "PipeWire configured."
 }
-# ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
 dotfiles() {
     info "Copying configuration files..."
-
-    [[ -d "$SCRIPT_DIR/config" ]] && cp -r "$SCRIPT_DIR/config/"* "$CONFIG_DIR/"
+    
+    # [FIX] Gunakan cp -a dengan /. untuk mencegah error jika folder kosong & mencegah nesting
+    [[ -d "$SCRIPT_DIR/config" ]] && cp -a "$SCRIPT_DIR/config/." "$CONFIG_DIR/" 2>/dev/null || true
 
     if [[ -d "$SCRIPT_DIR/system/gtk" ]]; then
+        # [FIX] Hapus folder lama sebelum copy untuk mencegah bug nesting cp -r (gtk-3.0/gtk-3.0)
+        [[ -d "$CONFIG_DIR/gtk-3.0" ]] && rm -rf "$CONFIG_DIR/gtk-3.0"
+        [[ -d "$CONFIG_DIR/gtk-4.0" ]] && rm -rf "$CONFIG_DIR/gtk-4.0"
         cp -r "$SCRIPT_DIR/system/gtk/gtk-3.0" "$CONFIG_DIR/"
         cp -r "$SCRIPT_DIR/system/gtk/gtk-4.0" "$CONFIG_DIR/"
         success "GTK config copied."
     else
-        warn "GTK config not found at $SCRIPT_DIR/system/gtk, skip."
+        warn "GTK config not found, skip."
     fi
 
-    [[ -d "$SCRIPT_DIR/system/lightdm"  ]] && sudo cp -r "$SCRIPT_DIR/system/lightdm/"*  /etc/lightdm/
-
-    [[ -d "$SCRIPT_DIR/fonts"  ]] && sudo cp -r "$SCRIPT_DIR/fonts/"*  "$FONTS_DIR/"
-    [[ -d "$SCRIPT_DIR/icons"  ]] && sudo cp -r "$SCRIPT_DIR/icons/"*  "$ICONS_DIR/"
-    [[ -d "$SCRIPT_DIR/themes" ]] && sudo cp -r "$SCRIPT_DIR/themes/"* "$THEMES_DIR/"
+    # [FIX] Gunakan cp -a src/. dest/ agar aman dari globbing error dan nesting
+    [[ -d "$SCRIPT_DIR/system/lightdm"  ]] && sudo cp -a "$SCRIPT_DIR/system/lightdm/." /etc/lightdm/ 2>/dev/null || true
+    [[ -d "$SCRIPT_DIR/fonts"  ]] && sudo cp -a "$SCRIPT_DIR/fonts/." "$FONTS_DIR/" 2>/dev/null || true
+    [[ -d "$SCRIPT_DIR/icons"  ]] && sudo cp -a "$SCRIPT_DIR/icons/." "$ICONS_DIR/" 2>/dev/null || true
+    [[ -d "$SCRIPT_DIR/themes" ]] && sudo cp -a "$SCRIPT_DIR/themes/." "$THEMES_DIR/" 2>/dev/null || true
     success "Fonts, Icons & Themes config copied."
 
     if [[ -d "$SCRIPT_DIR/other/pipewire" ]]; then
-        cp -r "$SCRIPT_DIR/other/pipewire"/* "$CONFIG_DIR/pipewire/"
-        chmod +x "$CONFIG_DIR/pipewire/"*
+        cp -a "$SCRIPT_DIR/other/pipewire/." "$CONFIG_DIR/pipewire/" 2>/dev/null || true
+        # [FIX] HANYA beri izin execute pada file .sh, JANGAN pada file .conf!
+        find "$CONFIG_DIR/pipewire/" -type f -name "*.sh" -exec chmod +x {} + 2>/dev/null || true
     fi
 
-    [[ -f "$SCRIPT_DIR/other/.bashrc"           ]] && cp  "$SCRIPT_DIR/other/.bashrc"           "$HOME_DIR/"
-    [[ -d "$SCRIPT_DIR/other/xorg.conf.d"       ]] && sudo cp -r "$SCRIPT_DIR/other/xorg.conf.d" /etc/X11/
-    [[ -f "$SCRIPT_DIR/other/resolv.conf"       ]] && sudo cp "$SCRIPT_DIR/other/resolv.conf"    /etc/
+    [[ -f "$SCRIPT_DIR/other/.bashrc" ]]           && cp  "$SCRIPT_DIR/other/.bashrc" "$HOME_DIR/"
+    [[ -d "$SCRIPT_DIR/other/xorg.conf.d" ]]       && sudo cp -a "$SCRIPT_DIR/other/xorg.conf.d/." /etc/X11/ 2>/dev/null || true
+    [[ -f "$SCRIPT_DIR/other/resolv.conf" ]]       && sudo cp "$SCRIPT_DIR/other/resolv.conf" /etc/
     [[ -f "$SCRIPT_DIR/system/elogind/logind.conf" ]] && sudo cp "$SCRIPT_DIR/system/elogind/logind.conf" /etc/elogind/
 
-    # Wallpaper
     if [[ -d "$SCRIPT_DIR/system/wallpaper" ]]; then
         sudo mkdir -p "$WALLPAPER_DIR"
-        sudo cp "$SCRIPT_DIR/system/wallpaper/"*.jpg "$WALLPAPER_DIR/"
+        sudo cp "$SCRIPT_DIR/system/wallpaper/"*.jpg "$WALLPAPER_DIR/" 2>/dev/null || true
     fi
 
     [[ -f "$SCRIPT_DIR/other/.bashrc" ]] && sudo cp "$SCRIPT_DIR/other/.bashrc" /root/ 2>/dev/null || true
-
     success "Dotfiles copied."
 }
 
 # ---------------------------------------------------------------------------
 # Refresh Helpers
 # ---------------------------------------------------------------------------
-
 refresh_fonts() {
     info "Refreshing font cache..."
     sudo fc-cache -fv "$FONTS_DIR" >/dev/null
@@ -671,9 +365,7 @@ refresh_fonts() {
 refresh_icons() {
     info "Refreshing icon cache..."
     for dir in "$ICONS_DIR"/*/; do
-        [[ -d "$dir" ]] && \
-            sudo gtk-update-icon-cache -f -t "$dir" 2>/dev/null || \
-            warn "Could not update icon cache for: $dir"
+        [[ -d "$dir" ]] && sudo gtk-update-icon-cache -f -t "$dir" 2>/dev/null || true
     done
     success "Icon cache updated."
 }
@@ -684,9 +376,7 @@ refresh_themes() {
     if command -v gsettings >/dev/null 2>&1; then
         local first_theme
         first_theme=$(ls "$THEMES_DIR" 2>/dev/null | head -1)
-        [[ -n "$first_theme" ]] && \
-            gsettings set org.gnome.desktop.interface gtk-theme "$first_theme" 2>/dev/null || \
-            warn "gsettings schema tidak ditemukan, skip auto-apply theme."
+        [[ -n "$first_theme" ]] && gsettings set org.gnome.desktop.interface gtk-theme "$first_theme" 2>/dev/null || true
     fi
     success "Theme refreshed."
 }
@@ -698,39 +388,28 @@ refresh_grub() {
     elif command -v grub-mkconfig >/dev/null 2>&1; then
         sudo grub-mkconfig -o /boot/grub/grub.cfg
     else
-        warn "grub-mkconfig / update-grub not found. Update GRUB manually."
-        return 1
+        warn "grub-mkconfig not found."
     fi
-
     info "Regenerating initramfs..."
     if command -v dracut >/dev/null 2>&1; then
         sudo dracut -f
     else
-        warn "dracut not found. Regenerate initramfs manually."
+        warn "dracut not found."
     fi
-
     success "GRUB config & initramfs regenerated."
 }
 
 # ---------------------------------------------------------------------------
-
 other() {
-    info "Configuring GRUB..."
-
+    info "Configuring GRUB & Plymouth..."
     if [[ -f "$SCRIPT_DIR/system/boot/grub" ]]; then
         sudo mkdir -p /etc/default/
         sudo cp "$SCRIPT_DIR/system/boot/grub" /etc/default/
-    else
-        warn "GRUB Config not found at $SCRIPT_DIR/system/boot/grub, skip."
     fi
-
     if [[ -d "$SCRIPT_DIR/system/boot/sleek" ]]; then
         sudo mkdir -p /usr/share/grub/themes
         sudo cp -r "$SCRIPT_DIR/system/boot/sleek" /usr/share/grub/themes/
-    else
-        warn "GRUB theme 'sleek' not found at $SCRIPT_DIR/system/boot/sleek, skip."
     fi
-
     if [[ -d "$SCRIPT_DIR/system/boot/t4n" ]]; then
         sudo mkdir -p /usr/share/plymouth/themes
         sudo cp -r "$SCRIPT_DIR/system/boot/t4n" /usr/share/plymouth/themes/
@@ -738,32 +417,24 @@ other() {
         sudo cp "$SCRIPT_DIR/system/boot/plymouth.conf" /etc/dracut.conf.d/
         sudo plymouth-set-default-theme -R t4n
     else
-        warn "Plymouth theme 't4n' not found at $SCRIPT_DIR/system/boot/t4n, skip."
+        warn "Plymouth theme 't4n' not found, skip."
     fi
-
     refresh_fonts
     refresh_icons
     refresh_themes
     refresh_grub
-
     success "GRUB theme & system config done."
 }
 
 # ---------------------------------------------------------------------------
-
 setup_services() {
     info "Enabling system services..."
-    local services=(dbus elogind NetworkManager lightdm rtkit polkit power-profiles-daemon)
+    # [FIX] Hapus dbus dan elogind karena sudah di-handle di setup_dbus()
+    local services=(NetworkManager lightdm rtkit polkit power-profiles-daemon)
     for svc in "${services[@]}"; do
-        if [[ -d "/etc/sv/$svc" ]]; then
-            if [[ ! -L "/var/service/$svc" ]]; then
-                sudo ln -s "/etc/sv/$svc" /var/service/
-                info "$svc enabled."
-            else
-                info "$svc already enabled, skip."
-            fi
-        else
-            warn "Service $svc not found."
+        if [[ -d "/etc/sv/$svc" ]] && [[ ! -L "/var/service/$svc" ]]; then
+            sudo ln -s "/etc/sv/$svc" /var/service/
+            info "$svc enabled."
         fi
     done
     success "Services activated."
@@ -777,20 +448,15 @@ disable_services() {
             sudo sv down "$svc" 2>/dev/null
             sudo rm -f "/var/service/$svc"
             info "$svc stopped and disabled."
-        else
-            warn "$svc is not enabled or not found."
         fi
     done
     success "Conflicting services disabled."
 }
 
 # ---------------------------------------------------------------------------
-
 setup_additional() {
     info "Applying additional configuration..."
-
     sudo mkdir -p /etc/polkit-1/rules.d
-
     sudo tee /etc/polkit-1/rules.d/10-bspwm.rules >/dev/null << 'EOF'
 polkit.addRule(function(action, subject) {
     if ((action.id == "org.freedesktop.login1.reboot" ||
@@ -801,7 +467,6 @@ polkit.addRule(function(action, subject) {
     }
 });
 EOF
-
     sudo tee /etc/polkit-1/rules.d/50-networkmanager.rules >/dev/null << 'EOF'
 polkit.addRule(function(action, subject) {
     if (subject.isInGroup("wheel")) {
@@ -818,7 +483,6 @@ polkit.addRule(function(action, subject) {
     }
 });
 EOF
-
     sudo usermod -a -G audio,video,input,disk,wheel "$USER"
 
     if [[ ! -w /sys/class/backlight/*/brightness ]] 2>/dev/null; then
@@ -830,39 +494,37 @@ EOF
 
     if [[ -f /etc/resolv.conf ]]; then
         sudo mkdir -p /etc/NetworkManager/conf.d
-        echo -e "[main]\nrc-manager=unmanaged" \
-            | sudo tee /etc/NetworkManager/conf.d/rc-manager.conf >/dev/null
+        echo -e "[main]\nrc-manager=unmanaged" | sudo tee /etc/NetworkManager/conf.d/rc-manager.conf >/dev/null
     fi
-
     success "Additional configuration complete."
 }
 
 # ---------------------------------------------------------------------------
-
 setup_betterlockscreen() {
     info "Setting up Betterlockscreen..."
-    
-    # Pastikan folder cache ada agar tidak error
     mkdir -p "$HOME/.cache/betterlockscreen" 2>/dev/null
     
+    # [FIX] betterlockscreen butuh X session untuk generate cache. Cek $DISPLAY.
+    if [[ -z "$DISPLAY" ]]; then
+        warn "No X session detected (DISPLAY not set). Skipping cache generation."
+        warn "Run manually later: betterlockscreen -u /usr/share/t4n-os/wallpaper/Void.jpg"
+        return
+    fi
+
     local wallpaper="$WALLPAPER_DIR/Void.jpg"
-    
-    # Fallback ke T4nOS.jpg jika Void.jpg tidak ada
     if [[ ! -f "$wallpaper" ]]; then
         wallpaper="$WALLPAPER_DIR/T4nOS.jpg"
     fi
 
     if [[ -f "$wallpaper" ]]; then
-        # Cukup gunakan -u, pengaturan blur sudah ada di betterlockscreenrc
         betterlockscreen -u "$wallpaper" --blur 0.8
-        success "Betterlockscreen cache generated for $(basename "$wallpaper")."
+        success "Betterlockscreen cache generated."
     else
-        warn "No wallpaper found at $WALLPAPER_DIR, skip betterlockscreen setup."
+        warn "No wallpaper found, skip."
     fi
 }
 
 # ---------------------------------------------------------------------------
-
 final_message() {
     echo ""
     echo -e "${GREEN}╔══════════════════════════════════════════════╗${NC}"
@@ -873,24 +535,12 @@ final_message() {
     echo -e "   ${CYAN}1. LOGOUT dari sesi saat ini (atau reboot).${NC}"
     echo -e "   ${CYAN}2. LOGIN kembali agar semua perubahan grup berlaku.${NC}"
     echo ""
-    echo -e "${BLUE}Setelah login:${NC}"
-    echo -e "  • Cek D-Bus session:  ${CYAN}echo \$DBUS_SESSION_BUS_ADDRESS${NC}"
-    echo -e "    Harusnya: 'unix:path=/run/user/1000/bus'"
-    echo -e "  • Cek ZRam aktif:     ${CYAN}cat /proc/swaps${NC}"
-    echo -e "  • Cek konfigurasi:    ${CYAN}cat /etc/sv/zramen/conf${NC}"
-    echo -e "  • Jika terminal gagal, buka TTY (Ctrl+Alt+F2) dan cek log:"
-    echo -e "    ${CYAN}tail -f ~/.config/bspwm/autostart.log${NC}"
-    echo ""
-    echo -e "  • Polybar cek: ${CYAN}pgrep polybar${NC}"
-    echo -e "  • Manual:      ${CYAN}~/.config/polybar/launch.sh${NC}"
-    echo ""
     echo -e "${GREEN}Terima kasih telah menggunakan script ini.${NC}"
 }
 
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
-
 main() {
     info "Memulai instalasi BSPWM T4n OS (Void Linux)..."
     install_packages
@@ -908,5 +558,4 @@ main() {
     setup_betterlockscreen
     final_message
 }
-
 main

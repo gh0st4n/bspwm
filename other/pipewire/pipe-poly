@@ -15,5 +15,5 @@ mute=$(get_mute)
 if [[ "$mute" == "muted" ]]; then
     echo "× Muted ×"
 else
-    echo "VOLUME $volume%"
+    echo "VOLUME:$volume%"
 fi
