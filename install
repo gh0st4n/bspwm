@@ -827,11 +827,23 @@ EOF
 
 setup_betterlockscreen() {
     info "Setting up Betterlockscreen..."
+    
+    # Pastikan folder cache ada agar tidak error
+    mkdir -p "$HOME/.cache/betterlockscreen" 2>/dev/null
+    
     local wallpaper="$WALLPAPER_DIR/Void.jpg"
+    
+    # Fallback ke T4nOS.jpg jika Void.jpg tidak ada
+    if [[ ! -f "$wallpaper" ]]; then
+        wallpaper="$WALLPAPER_DIR/T4nOS.jpg"
+    fi
+
     if [[ -f "$wallpaper" ]]; then
+        # Cukup gunakan -u, pengaturan blur sudah ada di betterlockscreenrc
         betterlockscreen -u "$wallpaper" --blur 0.8
+        success "Betterlockscreen cache generated for $(basename "$wallpaper")."
     else
-        warn "Wallpaper not found at $wallpaper, skip."
+        warn "No wallpaper found at $WALLPAPER_DIR, skip betterlockscreen setup."
     fi
 }
 

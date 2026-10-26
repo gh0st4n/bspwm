@@ -1,0 +1,1421 @@
+ .
+├──  config
+│   ├──  alacritty
+│   │   └──  alacritty.toml
+│   ├──  betterlockscreen
+│   │   └── 󰡯 betterlockscreenrc
+│   ├──  bspwm
+│   │   ├──  bspwmrc
+│   │   ├──  scripts
+│   │   │   ├── 󰡯 00A
+│   │   │   └──  lock
+│   │   └──  wallpaper
+│   │       ├── 󰂺 README.md
+│   │       ├──  wallpaper1.png
+│   │       ├──  wallpaper2.png
+│   │       ├──  wallpaper3.png
+│   │       ├──  wallpaper4.png
+│   │       ├──  wallpaper5.png
+│   │       ├──  wallpaper6.png
+│   │       ├──  wallpaper7.png
+│   │       ├──  wallpaper8.jpg
+│   │       ├──  wallpaper9.jpg
+│   │       └──  wallpaper10.jpg
+│   ├──  dunst
+│   │   └── 󰡯 dunstrc
+│   ├──  picom
+│   │   ├──  auto.sh
+│   │   └── 󱁻 picom.conf
+│   ├──  polybar
+│   │   ├──  auto-detect.log
+│   │   ├── 󱁻 colors.ini
+│   │   ├── 󱁻 config.ini
+│   │   ├──  detection.sh
+│   │   ├──  launch.sh
+│   │   ├── 󱁻 modules.ini
+│   │   ├──  scripts
+│   │   │   ├── 󰡯 bluetooth
+│   │   │   ├── 󰡯 cpu
+│   │   │   ├── 󰡯 memory
+│   │   │   ├── 󰡯 network
+│   │   │   └── 󰡯 temp
+│   │   └── 󱁻 system.ini
+│   ├──  rofi
+│   │   ├──  config.rasi
+│   │   ├──  monitor.rasi
+│   │   ├──  power-config.rasi
+│   │   ├──  profil.rasi
+│   │   ├──  shared
+│   │   │   ├──  colors.rasi
+│   │   │   └──  fonts.rasi
+│   │   └──  workspace.rasi
+│   ├──  sxhkd
+│   │   ├──  scripts
+│   │   │   ├── 󰡯 brightness
+│   │   │   ├── 󰡯 hdmi
+│   │   │   ├──  lock
+│   │   │   ├── 󰡯 monitor
+│   │   │   ├── 󰡯 power-profiles
+│   │   │   ├── 󰡯 powermenu
+│   │   │   └── 󰡯 powermenu-suspend
+│   │   └── 󱁻 sxhkdrc
+│   └──  Thunar
+│       └── 󰗀 uca.xml
+├──  fonts
+│   ├──  IosevkaTerm
+│   │   ├──  IosevkaTermNerdFont-Bold.ttf
+│   │   ├──  IosevkaTermNerdFont-BoldItalic.ttf
+│   │   ├──  IosevkaTermNerdFont-BoldOblique.ttf
+│   │   ├──  IosevkaTermNerdFont-ExtraBold.ttf
+│   │   ├──  IosevkaTermNerdFont-ExtraBoldItalic.ttf
+│   │   ├──  IosevkaTermNerdFont-ExtraBoldOblique.ttf
+│   │   ├──  IosevkaTermNerdFont-ExtraLight.ttf
+│   │   ├──  IosevkaTermNerdFont-ExtraLightItalic.ttf
+│   │   ├──  IosevkaTermNerdFont-ExtraLightOblique.ttf
+│   │   ├──  IosevkaTermNerdFont-Heavy.ttf
+│   │   ├──  IosevkaTermNerdFont-HeavyItalic.ttf
+│   │   ├──  IosevkaTermNerdFont-HeavyOblique.ttf
+│   │   ├──  IosevkaTermNerdFont-Italic.ttf
+│   │   ├──  IosevkaTermNerdFont-Light.ttf
+│   │   ├──  IosevkaTermNerdFont-LightItalic.ttf
+│   │   ├──  IosevkaTermNerdFont-LightOblique.ttf
+│   │   ├──  IosevkaTermNerdFont-Medium.ttf
+│   │   ├──  IosevkaTermNerdFont-MediumItalic.ttf
+│   │   ├──  IosevkaTermNerdFont-MediumOblique.ttf
+│   │   ├──  IosevkaTermNerdFont-Oblique.ttf
+│   │   ├──  IosevkaTermNerdFont-Regular.ttf
+│   │   ├──  IosevkaTermNerdFont-SemiBold.ttf
+│   │   ├──  IosevkaTermNerdFont-SemiBoldItalic.ttf
+│   │   ├──  IosevkaTermNerdFont-SemiBoldOblique.ttf
+│   │   ├──  IosevkaTermNerdFont-Thin.ttf
+│   │   ├──  IosevkaTermNerdFont-ThinItalic.ttf
+│   │   ├──  IosevkaTermNerdFont-ThinOblique.ttf
+│   │   ├──  IosevkaTermNerdFontMono-Bold.ttf
+│   │   ├──  IosevkaTermNerdFontMono-BoldItalic.ttf
+│   │   ├──  IosevkaTermNerdFontMono-BoldOblique.ttf
+│   │   ├──  IosevkaTermNerdFontMono-ExtraBold.ttf
+│   │   ├──  IosevkaTermNerdFontMono-ExtraBoldItalic.ttf
+│   │   ├──  IosevkaTermNerdFontMono-ExtraBoldOblique.ttf
+│   │   ├──  IosevkaTermNerdFontMono-ExtraLight.ttf
+│   │   ├──  IosevkaTermNerdFontMono-ExtraLightItalic.ttf
+│   │   ├──  IosevkaTermNerdFontMono-ExtraLightOblique.ttf
+│   │   ├──  IosevkaTermNerdFontMono-Heavy.ttf
+│   │   ├──  IosevkaTermNerdFontMono-HeavyItalic.ttf
+│   │   ├──  IosevkaTermNerdFontMono-HeavyOblique.ttf
+│   │   ├──  IosevkaTermNerdFontMono-Italic.ttf
+│   │   ├──  IosevkaTermNerdFontMono-Light.ttf
+│   │   ├──  IosevkaTermNerdFontMono-LightItalic.ttf
+│   │   ├──  IosevkaTermNerdFontMono-LightOblique.ttf
+│   │   ├──  IosevkaTermNerdFontMono-Medium.ttf
+│   │   ├──  IosevkaTermNerdFontMono-MediumItalic.ttf
+│   │   ├──  IosevkaTermNerdFontMono-MediumOblique.ttf
+│   │   ├──  IosevkaTermNerdFontMono-Oblique.ttf
+│   │   ├──  IosevkaTermNerdFontMono-Regular.ttf
+│   │   ├──  IosevkaTermNerdFontMono-SemiBold.ttf
+│   │   ├──  IosevkaTermNerdFontMono-SemiBoldItalic.ttf
+│   │   ├──  IosevkaTermNerdFontMono-SemiBoldOblique.ttf
+│   │   ├──  IosevkaTermNerdFontMono-Thin.ttf
+│   │   ├──  IosevkaTermNerdFontMono-ThinItalic.ttf
+│   │   ├──  IosevkaTermNerdFontMono-ThinOblique.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-Bold.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-BoldItalic.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-BoldOblique.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-ExtraBold.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-ExtraBoldItalic.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-ExtraBoldOblique.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-ExtraLight.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-ExtraLightItalic.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-ExtraLightOblique.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-Heavy.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-HeavyItalic.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-HeavyOblique.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-Italic.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-Light.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-LightItalic.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-LightOblique.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-Medium.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-MediumItalic.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-MediumOblique.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-Oblique.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-Regular.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-SemiBold.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-SemiBoldItalic.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-SemiBoldOblique.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-Thin.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-ThinItalic.ttf
+│   │   ├──  IosevkaTermNerdFontPropo-ThinOblique.ttf
+│   │   ├──  LICENSE.md
+│   │   └── 󰂺 README.md
+│   ├──  JetBrainsMono
+│   │   ├──  JetBrainsMonoNerdFont-Bold.ttf
+│   │   ├──  JetBrainsMonoNerdFont-BoldItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFont-ExtraBold.ttf
+│   │   ├──  JetBrainsMonoNerdFont-ExtraBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFont-ExtraLight.ttf
+│   │   ├──  JetBrainsMonoNerdFont-ExtraLightItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFont-Italic.ttf
+│   │   ├──  JetBrainsMonoNerdFont-Light.ttf
+│   │   ├──  JetBrainsMonoNerdFont-LightItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFont-Medium.ttf
+│   │   ├──  JetBrainsMonoNerdFont-MediumItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFont-Regular.ttf
+│   │   ├──  JetBrainsMonoNerdFont-SemiBold.ttf
+│   │   ├──  JetBrainsMonoNerdFont-SemiBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFont-Thin.ttf
+│   │   ├──  JetBrainsMonoNerdFont-ThinItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-Bold.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-BoldItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-ExtraBold.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-ExtraBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-ExtraLight.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-ExtraLightItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-Italic.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-Light.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-LightItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-Medium.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-MediumItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-Regular.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-SemiBold.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-SemiBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-Thin.ttf
+│   │   ├──  JetBrainsMonoNerdFontMono-ThinItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-Bold.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-BoldItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-ExtraBold.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-ExtraBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-ExtraLight.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-ExtraLightItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-Italic.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-Light.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-LightItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-Medium.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-MediumItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-Regular.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-SemiBold.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-SemiBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-Thin.ttf
+│   │   ├──  JetBrainsMonoNerdFontPropo-ThinItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-Bold.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-BoldItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-ExtraBold.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-ExtraBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-ExtraLight.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-ExtraLightItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-Italic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-Light.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-LightItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-Medium.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-MediumItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-Regular.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-SemiBold.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-SemiBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-Thin.ttf
+│   │   ├──  JetBrainsMonoNLNerdFont-ThinItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-Bold.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-BoldItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-ExtraBold.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-ExtraBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-ExtraLight.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-ExtraLightItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-Italic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-Light.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-LightItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-Medium.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-MediumItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-Regular.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-SemiBold.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-SemiBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-Thin.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontMono-ThinItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-Bold.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-BoldItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-ExtraBold.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-ExtraBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-ExtraLight.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-ExtraLightItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-Italic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-Light.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-LightItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-Medium.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-MediumItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-Regular.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-SemiBold.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-SemiBoldItalic.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-Thin.ttf
+│   │   ├──  JetBrainsMonoNLNerdFontPropo-ThinItalic.ttf
+│   │   ├──  OFL.txt
+│   │   └── 󰂺 README.md
+│   └──  NerdFontsSymbolsOnly
+│       ├── 󱁻 10-nerd-font-symbols.conf
+│       ├──  LICENSE
+│       ├── 󰂺 README.md
+│       ├──  SymbolsNerdFont-Regular.ttf
+│       └──  SymbolsNerdFontMono-Regular.ttf
+├──  icons
+│   └──  default
+│       └──  index.theme
+├── 󰡯 install
+├──  note.md
+├──  other
+│   ├──  pipewire
+│   │   ├── 󰡯 audio-switch
+│   │   ├── 󰡯 pipe-poly
+│   │   └── 󰡯 volume
+│   ├── 󱁻 resolv.conf
+│   └──  xorg.conf.d
+│       └── 󱁻 10-touchpad.conf
+├── 󰂺 README.md
+├──  system
+│   ├──  boot
+│   │   ├── 󰡯 grub
+│   │   ├── 󱁻 plymouth.conf
+│   │   ├──  sleek
+│   │   │   ├──  boot_menu_c.png
+│   │   │   ├──  boot_menu_e.png
+│   │   │   ├──  boot_menu_n.png
+│   │   │   ├──  boot_menu_ne.png
+│   │   │   ├──  boot_menu_nw.png
+│   │   │   ├──  boot_menu_s.png
+│   │   │   ├──  boot_menu_se.png
+│   │   │   ├──  boot_menu_sw.png
+│   │   │   ├──  boot_menu_w.png
+│   │   │   ├──  icons
+│   │   │   │   ├──  antergos.png
+│   │   │   │   ├──  arch.png
+│   │   │   │   ├──  archlinux.png
+│   │   │   │   ├──  cancel.png
+│   │   │   │   ├──  chakra.png
+│   │   │   │   ├──  debian.png
+│   │   │   │   ├──  deepin.png
+│   │   │   │   ├──  driver.png
+│   │   │   │   ├──  edit.png
+│   │   │   │   ├──  efi.png
+│   │   │   │   ├──  elementary.png
+│   │   │   │   ├──  endeavouros.png
+│   │   │   │   ├──  fedora.png
+│   │   │   │   ├──  fedoraos.png
+│   │   │   │   ├──  find.efi.png
+│   │   │   │   ├──  find.none.png
+│   │   │   │   ├──  gentoo.png
+│   │   │   │   ├──  gnu-linux.png
+│   │   │   │   ├──  help.png
+│   │   │   │   ├──  iso.png
+│   │   │   │   ├──  kali.png
+│   │   │   │   ├──  kaos.png
+│   │   │   │   ├──  kbd.png
+│   │   │   │   ├──  korora.png
+│   │   │   │   ├──  kubuntu.png
+│   │   │   │   ├──  lang.png
+│   │   │   │   ├──  langitketujuh.png
+│   │   │   │   ├──  langitketujuhos.png
+│   │   │   │   ├──  lfs.png
+│   │   │   │   ├──  linux.png
+│   │   │   │   ├──  linuxmint.png
+│   │   │   │   ├──  lubuntu.png
+│   │   │   │   ├──  macosx.png
+│   │   │   │   ├──  mageia.png
+│   │   │   │   ├──  Manjaro.i686.png
+│   │   │   │   ├──  manjaro.png
+│   │   │   │   ├──  Manjaro.x86_64.png
+│   │   │   │   ├──  memtest.png
+│   │   │   │   ├──  nixos.png
+│   │   │   │   ├──  opensuse.png
+│   │   │   │   ├──  parrot.png
+│   │   │   │   ├──  pop-os.png
+│   │   │   │   ├──  poweroff.png
+│   │   │   │   ├──  recovery.png
+│   │   │   │   ├──  restart.png
+│   │   │   │   ├──  settings.png
+│   │   │   │   ├──  shutdown.png
+│   │   │   │   ├──  siduction.png
+│   │   │   │   ├──  solus.png
+│   │   │   │   ├──  steamos.png
+│   │   │   │   ├──  submenu.png
+│   │   │   │   ├──  type.png
+│   │   │   │   ├──  tz.png
+│   │   │   │   ├──  ubuntu.png
+│   │   │   │   ├──  ultramarine.png
+│   │   │   │   ├──  unknown.png
+│   │   │   │   ├──  unset.png
+│   │   │   │   ├──  void.png
+│   │   │   │   ├──  windows.png
+│   │   │   │   ├──  xubuntu.png
+│   │   │   │   ├──  xubuntuos.png
+│   │   │   │   ├──  zorin.png
+│   │   │   │   └──  zorinos.png
+│   │   │   ├──  info.png
+│   │   │   ├──  menu.png
+│   │   │   ├──  password_field.png
+│   │   │   ├──  Poppins-14.pf2
+│   │   │   ├──  Poppins-16.pf2
+│   │   │   ├──  Poppins-18.pf2
+│   │   │   ├──  Poppins-48.pf2
+│   │   │   ├──  progress_bar_s.png
+│   │   │   ├──  progress_highlight_c.png
+│   │   │   ├──  select_bkg_c.png
+│   │   │   ├──  select_bkg_e.png
+│   │   │   ├──  select_bkg_w.png
+│   │   │   ├──  slider_c.png
+│   │   │   ├──  slider_n.png
+│   │   │   ├──  slider_s.png
+│   │   │   ├──  terminus-14.pf2
+│   │   │   └──  theme.txt
+│   │   └──  t4n
+│   │       ├──  animation-000.png
+│   │       ├──  animation-001.png
+│   │       ├──  animation-002.png
+│   │       ├──  animation-003.png
+│   │       ├──  animation-004.png
+│   │       ├──  animation-005.png
+│   │       ├──  animation-006.png
+│   │       ├──  animation-007.png
+│   │       ├──  animation-008.png
+│   │       ├──  animation-009.png
+│   │       ├──  animation-010.png
+│   │       ├──  animation-011.png
+│   │       ├──  animation-012.png
+│   │       ├──  animation-013.png
+│   │       ├──  animation-014.png
+│   │       ├──  animation-015.png
+│   │       ├──  animation-016.png
+│   │       ├──  animation-017.png
+│   │       ├──  animation-018.png
+│   │       ├──  animation-019.png
+│   │       ├──  animation-020.png
+│   │       ├──  animation-021.png
+│   │       ├──  animation-022.png
+│   │       ├──  animation-023.png
+│   │       ├──  animation-024.png
+│   │       ├──  animation-025.png
+│   │       ├──  animation-026.png
+│   │       ├──  animation-027.png
+│   │       ├──  animation-028.png
+│   │       ├──  animation-029.png
+│   │       ├──  animation-030.png
+│   │       ├──  animation-031.png
+│   │       ├──  animation-032.png
+│   │       ├──  animation-033.png
+│   │       ├──  animation-034.png
+│   │       ├──  animation-035.png
+│   │       ├──  animation-036.png
+│   │       ├──  animation-037.png
+│   │       ├──  animation-038.png
+│   │       ├──  animation-039.png
+│   │       ├──  animation-040.png
+│   │       ├──  animation-041.png
+│   │       ├──  animation-042.png
+│   │       ├──  animation-043.png
+│   │       ├──  animation-044.png
+│   │       ├──  animation-045.png
+│   │       ├──  animation-046.png
+│   │       ├──  animation-047.png
+│   │       ├──  animation-048.png
+│   │       ├──  animation-049.png
+│   │       ├──  animation-050.png
+│   │       ├──  animation-051.png
+│   │       ├──  animation-052.png
+│   │       ├──  animation-053.png
+│   │       ├──  animation-054.png
+│   │       ├──  animation-055.png
+│   │       ├──  animation-056.png
+│   │       ├──  animation-057.png
+│   │       ├──  animation-058.png
+│   │       ├──  animation-059.png
+│   │       ├──  animation-060.png
+│   │       ├──  animation-061.png
+│   │       ├──  animation-062.png
+│   │       ├──  animation-063.png
+│   │       ├──  animation-064.png
+│   │       ├──  animation-065.png
+│   │       ├──  animation-066.png
+│   │       ├──  animation-067.png
+│   │       ├──  animation-068.png
+│   │       ├──  animation-069.png
+│   │       ├──  animation-070.png
+│   │       ├──  animation-071.png
+│   │       ├──  animation-072.png
+│   │       ├──  animation-073.png
+│   │       ├──  animation-074.png
+│   │       ├──  animation-075.png
+│   │       ├──  animation-076.png
+│   │       ├──  animation-077.png
+│   │       ├──  animation-078.png
+│   │       ├──  animation-079.png
+│   │       ├──  animation-080.png
+│   │       ├──  animation-081.png
+│   │       ├──  animation-082.png
+│   │       ├──  animation-083.png
+│   │       ├──  animation-084.png
+│   │       ├──  animation-085.png
+│   │       ├──  animation-086.png
+│   │       ├──  animation-087.png
+│   │       ├──  animation-088.png
+│   │       ├──  animation-089.png
+│   │       ├──  animation-090.png
+│   │       ├──  animation-091.png
+│   │       ├──  animation-092.png
+│   │       ├──  animation-093.png
+│   │       ├──  animation-094.png
+│   │       ├──  animation-095.png
+│   │       ├──  animation-096.png
+│   │       ├──  animation-097.png
+│   │       ├──  animation-098.png
+│   │       ├──  animation-099.png
+│   │       ├──  animation-100.png
+│   │       ├──  animation-101.png
+│   │       ├──  animation-102.png
+│   │       ├──  animation-103.png
+│   │       ├──  animation-104.png
+│   │       ├──  animation-105.png
+│   │       ├──  animation-106.png
+│   │       ├──  animation-107.png
+│   │       ├──  animation-108.png
+│   │       ├──  animation-109.png
+│   │       ├──  animation-110.png
+│   │       ├──  animation-111.png
+│   │       ├──  animation-112.png
+│   │       ├──  animation-113.png
+│   │       ├──  animation-114.png
+│   │       ├──  animation-115.png
+│   │       ├──  animation-116.png
+│   │       ├──  animation-117.png
+│   │       ├──  animation-118.png
+│   │       ├──  animation-119.png
+│   │       ├──  animation-120.png
+│   │       ├──  animation-121.png
+│   │       ├──  animation-122.png
+│   │       ├──  animation-123.png
+│   │       ├──  animation-124.png
+│   │       ├──  animation-125.png
+│   │       ├──  animation-126.png
+│   │       ├──  animation-127.png
+│   │       ├──  animation-test.png
+│   │       ├──  bullet.png
+│   │       ├──  capslock.png
+│   │       ├──  entry.png
+│   │       ├──  keyboard.png
+│   │       ├──  keymap-render.png
+│   │       ├──  lock.png
+│   │       ├──  progress-00.png
+│   │       ├──  progress-01.png
+│   │       ├──  progress-02.png
+│   │       ├──  progress-03.png
+│   │       ├──  progress-04.png
+│   │       ├──  progress-05.png
+│   │       ├──  progress-06.png
+│   │       ├──  progress-07.png
+│   │       ├──  progress-08.png
+│   │       ├──  progress-09.png
+│   │       ├──  progress-10.png
+│   │       ├──  progress-11.png
+│   │       ├──  progress-12.png
+│   │       ├──  progress-13.png
+│   │       ├──  progress-14.png
+│   │       ├──  progress-15.png
+│   │       ├──  progress-16.png
+│   │       ├──  progress-17.png
+│   │       ├──  progress-18.png
+│   │       ├──  progress-19.png
+│   │       ├──  progress-20.png
+│   │       ├──  progress-21.png
+│   │       ├──  progress-22.png
+│   │       ├──  progress-23.png
+│   │       ├──  progress-24.png
+│   │       ├──  progress-25.png
+│   │       ├──  progress-26.png
+│   │       ├──  progress-27.png
+│   │       ├──  progress-28.png
+│   │       ├──  progress-29.png
+│   │       ├──  progress-30.png
+│   │       ├──  progress-31.png
+│   │       ├──  progress-32.png
+│   │       ├──  progress-33.png
+│   │       ├──  progress-34.png
+│   │       ├──  progress-35.png
+│   │       ├──  t4n.grub
+│   │       └──  t4n.plymouth
+│   ├──  elogind
+│   │   └── 󱁻 logind.conf
+│   ├──  gtk
+│   │   ├──  gtk-3.0
+│   │   │   └── 󱁻 settings.ini
+│   │   └──  gtk-4.0
+│   │       └── 󱁻 settings.ini
+│   ├──  lightdm
+│   │   ├── 󱁻 lightdm-gtk-greeter.conf
+│   │   └── 󱁻 lightdm.conf
+│   └──  wallpaper
+│       ├──  T4nOS.jpg
+│       └──  Void.jpg
+├──  themes
+│   ├──  Everforest-Dark
+│   │   ├──  cinnamon
+│   │   │   ├──  assets
+│   │   │   │   ├── 󰕙 add-workspace-active.svg
+│   │   │   │   ├── 󰕙 add-workspace-hover.svg
+│   │   │   │   ├── 󰕙 add-workspace.svg
+│   │   │   │   ├── 󰕙 calendar-arrow-left.svg
+│   │   │   │   ├── 󰕙 calendar-arrow-right.svg
+│   │   │   │   ├── 󰕙 checkbox-dark.svg
+│   │   │   │   ├── 󰕙 checkbox-off.svg
+│   │   │   │   ├── 󰕙 checkbox.svg
+│   │   │   │   ├── 󰕙 close-active.svg
+│   │   │   │   ├── 󰕙 close-hover.svg
+│   │   │   │   ├── 󰕙 close.svg
+│   │   │   │   ├── 󰕙 corner-ripple.svg
+│   │   │   │   ├── 󰕙 radiobutton-dark.svg
+│   │   │   │   ├── 󰕙 radiobutton-off.svg
+│   │   │   │   ├── 󰕙 radiobutton.svg
+│   │   │   │   ├── 󰕙 toggle-off.svg
+│   │   │   │   ├── 󰕙 toggle-on-dark.svg
+│   │   │   │   ├── 󰕙 toggle-on.svg
+│   │   │   │   └── 󰕙 trash-icon.svg
+│   │   │   ├──  cinnamon.css
+│   │   │   └──  thumbnail.png
+│   │   ├──  gnome-shell
+│   │   │   ├──  assets
+│   │   │   │   ├── 󰕙 calendar-arrow-left.svg
+│   │   │   │   ├── 󰕙 calendar-arrow-right.svg
+│   │   │   │   ├── 󰕙 calendar-today.svg
+│   │   │   │   ├── 󰕙 checkbox-dark.svg
+│   │   │   │   ├── 󰕙 checkbox-off-active.svg
+│   │   │   │   ├── 󰕙 checkbox-off-hover.svg
+│   │   │   │   ├── 󰕙 checkbox-off.svg
+│   │   │   │   ├── 󰕙 checkbox.svg
+│   │   │   │   ├── 󰕙 dash-placeholder.svg
+│   │   │   │   ├── 󰕙 no-events.svg
+│   │   │   │   ├── 󰕙 no-notifications.svg
+│   │   │   │   ├── 󰕙 noise-texture.svg
+│   │   │   │   ├── 󰕙 process-working.svg
+│   │   │   │   ├── 󰕙 toggle-off.svg
+│   │   │   │   ├── 󰕙 toggle-on-dark.svg
+│   │   │   │   └── 󰕙 toggle-on.svg
+│   │   │   ├──  gnome-shell.css
+│   │   │   └──  pad-osd.css
+│   │   ├──  gtk-2.0
+│   │   │   ├──  apps.rc
+│   │   │   ├──  assets
+│   │   │   │   ├──  border.png
+│   │   │   │   ├──  button-active.png
+│   │   │   │   ├──  button-disabled.png
+│   │   │   │   ├──  button-hover.png
+│   │   │   │   ├──  button.png
+│   │   │   │   ├──  checkbox-checked-active.png
+│   │   │   │   ├──  checkbox-checked-disabled.png
+│   │   │   │   ├──  checkbox-checked-hover.png
+│   │   │   │   ├──  checkbox-checked.png
+│   │   │   │   ├──  checkbox-mixed-active.png
+│   │   │   │   ├──  checkbox-mixed-disabled.png
+│   │   │   │   ├──  checkbox-mixed-hover.png
+│   │   │   │   ├──  checkbox-mixed.png
+│   │   │   │   ├──  checkbox-unchecked-active.png
+│   │   │   │   ├──  checkbox-unchecked-disabled.png
+│   │   │   │   ├──  checkbox-unchecked-hover.png
+│   │   │   │   ├──  checkbox-unchecked.png
+│   │   │   │   ├──  combo-left-entry-active.png
+│   │   │   │   ├──  combo-left-entry-disabled.png
+│   │   │   │   ├──  combo-left-entry-hover.png
+│   │   │   │   ├──  combo-left-entry.png
+│   │   │   │   ├──  combo-right-entry-active.png
+│   │   │   │   ├──  combo-right-entry-disabled.png
+│   │   │   │   ├──  combo-right-entry-hover.png
+│   │   │   │   ├──  combo-right-entry.png
+│   │   │   │   ├──  entry-active.png
+│   │   │   │   ├──  entry-background-disabled.png
+│   │   │   │   ├──  entry-background.png
+│   │   │   │   ├──  entry-disabled.png
+│   │   │   │   ├──  entry-hover.png
+│   │   │   │   ├──  entry.png
+│   │   │   │   ├──  flat-button-active.png
+│   │   │   │   ├──  flat-button-disabled.png
+│   │   │   │   ├──  flat-button-hover.png
+│   │   │   │   ├──  flat-button.png
+│   │   │   │   ├──  focus.png
+│   │   │   │   ├──  frame-inline.png
+│   │   │   │   ├──  frame-notebook.png
+│   │   │   │   ├──  frame.png
+│   │   │   │   ├──  handle-horz-active.png
+│   │   │   │   ├──  handle-horz-hover.png
+│   │   │   │   ├──  handle-horz.png
+│   │   │   │   ├──  handle-vert-active.png
+│   │   │   │   ├──  handle-vert-hover.png
+│   │   │   │   ├──  handle-vert.png
+│   │   │   │   ├──  menu-checkbox-checked-disabled.png
+│   │   │   │   ├──  menu-checkbox-checked.png
+│   │   │   │   ├──  menu-checkbox-mixed-disabled.png
+│   │   │   │   ├──  menu-checkbox-mixed.png
+│   │   │   │   ├──  menu-checkbox-unchecked-disabled.png
+│   │   │   │   ├──  menu-checkbox-unchecked.png
+│   │   │   │   ├──  menu-radio-checked-disabled.png
+│   │   │   │   ├──  menu-radio-checked.png
+│   │   │   │   ├──  menu-radio-mixed-disabled.png
+│   │   │   │   ├──  menu-radio-mixed.png
+│   │   │   │   ├──  menu-radio-unchecked-disabled.png
+│   │   │   │   ├──  menu-radio-unchecked.png
+│   │   │   │   ├──  pan-down-alt-disabled.png
+│   │   │   │   ├──  pan-down-alt.png
+│   │   │   │   ├──  pan-down-disabled.png
+│   │   │   │   ├──  pan-down.png
+│   │   │   │   ├──  pan-left-alt-disabled.png
+│   │   │   │   ├──  pan-left-alt.png
+│   │   │   │   ├──  pan-left-disabled.png
+│   │   │   │   ├──  pan-left-semi.png
+│   │   │   │   ├──  pan-left.png
+│   │   │   │   ├──  pan-right-alt-disabled.png
+│   │   │   │   ├──  pan-right-alt.png
+│   │   │   │   ├──  pan-right-disabled.png
+│   │   │   │   ├──  pan-right-semi.png
+│   │   │   │   ├──  pan-right.png
+│   │   │   │   ├──  pan-up-alt-disabled.png
+│   │   │   │   ├──  pan-up-alt.png
+│   │   │   │   ├──  pan-up-disabled.png
+│   │   │   │   ├──  pan-up.png
+│   │   │   │   ├──  progressbar-progress.png
+│   │   │   │   ├──  progressbar-trough.png
+│   │   │   │   ├──  radio-checked-active.png
+│   │   │   │   ├──  radio-checked-disabled.png
+│   │   │   │   ├──  radio-checked-hover.png
+│   │   │   │   ├──  radio-checked.png
+│   │   │   │   ├──  radio-mixed-active.png
+│   │   │   │   ├──  radio-mixed-disabled.png
+│   │   │   │   ├──  radio-mixed-hover.png
+│   │   │   │   ├──  radio-mixed.png
+│   │   │   │   ├──  radio-unchecked-active.png
+│   │   │   │   ├──  radio-unchecked-disabled.png
+│   │   │   │   ├──  radio-unchecked-hover.png
+│   │   │   │   ├──  radio-unchecked.png
+│   │   │   │   ├──  scale-horz-trough-active.png
+│   │   │   │   ├──  scale-horz-trough-disabled.png
+│   │   │   │   ├──  scale-horz-trough.png
+│   │   │   │   ├──  scale-slider-active.png
+│   │   │   │   ├──  scale-slider-disabled.png
+│   │   │   │   ├──  scale-slider-hover.png
+│   │   │   │   ├──  scale-slider.png
+│   │   │   │   ├──  scale-vert-trough-active.png
+│   │   │   │   ├──  scale-vert-trough-disabled.png
+│   │   │   │   ├──  scale-vert-trough.png
+│   │   │   │   ├──  scrollbar-horz-slider-active.png
+│   │   │   │   ├──  scrollbar-horz-slider-disabled.png
+│   │   │   │   ├──  scrollbar-horz-slider-hover.png
+│   │   │   │   ├──  scrollbar-horz-slider.png
+│   │   │   │   ├──  scrollbar-horz-trough.png
+│   │   │   │   ├──  scrollbar-vert-ltr-slider-active.png
+│   │   │   │   ├──  scrollbar-vert-ltr-slider-disabled.png
+│   │   │   │   ├──  scrollbar-vert-ltr-slider-hover.png
+│   │   │   │   ├──  scrollbar-vert-ltr-slider.png
+│   │   │   │   ├──  scrollbar-vert-ltr-trough.png
+│   │   │   │   ├──  scrollbar-vert-rtl-slider-active.png
+│   │   │   │   ├──  scrollbar-vert-rtl-slider-disabled.png
+│   │   │   │   ├──  scrollbar-vert-rtl-slider-hover.png
+│   │   │   │   ├──  scrollbar-vert-rtl-slider.png
+│   │   │   │   ├──  scrollbar-vert-rtl-trough.png
+│   │   │   │   ├──  spin-ltr-down-active.png
+│   │   │   │   ├──  spin-ltr-down-disabled.png
+│   │   │   │   ├──  spin-ltr-down-hover.png
+│   │   │   │   ├──  spin-ltr-down.png
+│   │   │   │   ├──  spin-ltr-up-active.png
+│   │   │   │   ├──  spin-ltr-up-disabled.png
+│   │   │   │   ├──  spin-ltr-up-hover.png
+│   │   │   │   ├──  spin-ltr-up.png
+│   │   │   │   ├──  spin-rtl-down-active.png
+│   │   │   │   ├──  spin-rtl-down-disabled.png
+│   │   │   │   ├──  spin-rtl-down-hover.png
+│   │   │   │   ├──  spin-rtl-down.png
+│   │   │   │   ├──  spin-rtl-up-active.png
+│   │   │   │   ├──  spin-rtl-up-disabled.png
+│   │   │   │   ├──  spin-rtl-up-hover.png
+│   │   │   │   ├──  spin-rtl-up.png
+│   │   │   │   ├──  tab.png
+│   │   │   │   ├──  treeview-ltr-button-active.png
+│   │   │   │   ├──  treeview-ltr-button-hover.png
+│   │   │   │   ├──  treeview-ltr-button.png
+│   │   │   │   ├──  treeview-rtl-button-active.png
+│   │   │   │   ├──  treeview-rtl-button-hover.png
+│   │   │   │   └──  treeview-rtl-button.png
+│   │   │   ├──  gtkrc
+│   │   │   ├──  hacks.rc
+│   │   │   └──  main.rc
+│   │   ├──  gtk-3.0
+│   │   │   ├──  assets
+│   │   │   │   ├──  scalable
+│   │   │   │   │   ├── 󰕙 checkbox-checked-symbolic.svg
+│   │   │   │   │   ├── 󰕙 checkbox-checked-symbolic@2.svg
+│   │   │   │   │   ├── 󰕙 checkbox-mixed-symbolic.svg
+│   │   │   │   │   ├── 󰕙 checkbox-mixed-symbolic@2.svg
+│   │   │   │   │   ├── 󰕙 close.svg
+│   │   │   │   │   ├── 󰕙 cursor-handle-symbolic.svg
+│   │   │   │   │   ├── 󰕙 maximize.svg
+│   │   │   │   │   ├── 󰕙 minimize.svg
+│   │   │   │   │   ├── 󰕙 radio-checked-symbolic.svg
+│   │   │   │   │   ├── 󰕙 radio-checked-symbolic@2.svg
+│   │   │   │   │   ├── 󰕙 scale-horz-marks-after-slider-symbolic.svg
+│   │   │   │   │   ├── 󰕙 scale-horz-marks-before-slider-symbolic.svg
+│   │   │   │   │   ├── 󰕙 scale-slider-hover-symbolic.svg
+│   │   │   │   │   ├── 󰕙 scale-slider-hover-symbolic@2.svg
+│   │   │   │   │   ├── 󰕙 scale-slider-symbolic.svg
+│   │   │   │   │   ├── 󰕙 scale-slider-symbolic@2.svg
+│   │   │   │   │   ├── 󰕙 scale-vert-marks-after-slider-symbolic.svg
+│   │   │   │   │   ├── 󰕙 scale-vert-marks-before-slider-symbolic.svg
+│   │   │   │   │   ├── 󰕙 small-checkbox-checked-symbolic.svg
+│   │   │   │   │   ├── 󰕙 small-checkbox-checked-symbolic@2.svg
+│   │   │   │   │   ├── 󰕙 small-checkbox-mixed-symbolic.svg
+│   │   │   │   │   ├── 󰕙 small-checkbox-mixed-symbolic@2.svg
+│   │   │   │   │   ├── 󰕙 small-radio-checked-symbolic.svg
+│   │   │   │   │   ├── 󰕙 small-radio-checked-symbolic@2.svg
+│   │   │   │   │   └── 󰕙 unmaximize.svg
+│   │   │   │   ├──  scale-horz-marks-after-slider-dark.png
+│   │   │   │   ├──  scale-horz-marks-after-slider-dark@2.png
+│   │   │   │   ├──  scale-horz-marks-after-slider-disabled-dark.png
+│   │   │   │   ├──  scale-horz-marks-after-slider-disabled-dark@2.png
+│   │   │   │   ├──  scale-horz-marks-after-slider-disabled.png
+│   │   │   │   ├──  scale-horz-marks-after-slider-disabled@2.png
+│   │   │   │   ├──  scale-horz-marks-after-slider.png
+│   │   │   │   ├──  scale-horz-marks-after-slider@2.png
+│   │   │   │   ├──  scale-horz-marks-before-slider-dark.png
+│   │   │   │   ├──  scale-horz-marks-before-slider-dark@2.png
+│   │   │   │   ├──  scale-horz-marks-before-slider-disabled-dark.png
+│   │   │   │   ├──  scale-horz-marks-before-slider-disabled-dark@2.png
+│   │   │   │   ├──  scale-horz-marks-before-slider-disabled.png
+│   │   │   │   ├──  scale-horz-marks-before-slider-disabled@2.png
+│   │   │   │   ├──  scale-horz-marks-before-slider.png
+│   │   │   │   ├──  scale-horz-marks-before-slider@2.png
+│   │   │   │   ├──  scale-vert-marks-after-slider-dark.png
+│   │   │   │   ├──  scale-vert-marks-after-slider-dark@2.png
+│   │   │   │   ├──  scale-vert-marks-after-slider-disabled-dark.png
+│   │   │   │   ├──  scale-vert-marks-after-slider-disabled-dark@2.png
+│   │   │   │   ├──  scale-vert-marks-after-slider-disabled.png
+│   │   │   │   ├──  scale-vert-marks-after-slider-disabled@2.png
+│   │   │   │   ├──  scale-vert-marks-after-slider.png
+│   │   │   │   ├──  scale-vert-marks-after-slider@2.png
+│   │   │   │   ├──  scale-vert-marks-before-slider-dark.png
+│   │   │   │   ├──  scale-vert-marks-before-slider-dark@2.png
+│   │   │   │   ├──  scale-vert-marks-before-slider-disabled-dark.png
+│   │   │   │   ├──  scale-vert-marks-before-slider-disabled-dark@2.png
+│   │   │   │   ├──  scale-vert-marks-before-slider-disabled.png
+│   │   │   │   ├──  scale-vert-marks-before-slider-disabled@2.png
+│   │   │   │   ├──  scale-vert-marks-before-slider.png
+│   │   │   │   ├──  scale-vert-marks-before-slider@2.png
+│   │   │   │   ├──  selectionmode-checkbox-checked-dark.png
+│   │   │   │   ├──  selectionmode-checkbox-checked-dark@2.png
+│   │   │   │   ├──  selectionmode-checkbox-checked.png
+│   │   │   │   ├──  selectionmode-checkbox-checked@2.png
+│   │   │   │   ├──  selectionmode-checkbox-unchecked-dark.png
+│   │   │   │   ├──  selectionmode-checkbox-unchecked-dark@2.png
+│   │   │   │   ├──  selectionmode-checkbox-unchecked.png
+│   │   │   │   └──  selectionmode-checkbox-unchecked@2.png
+│   │   │   ├──  gtk-dark.css
+│   │   │   ├──  gtk.css
+│   │   │   └──  thumbnail.png
+│   │   ├──  gtk-4.0
+│   │   │   ├──  assets
+│   │   │   │   ├── 󰕙 checkbox-checked-symbolic.svg
+│   │   │   │   ├── 󰕙 checkbox-checked-symbolic@2.svg
+│   │   │   │   ├── 󰕙 checkbox-mixed-symbolic.svg
+│   │   │   │   ├── 󰕙 checkbox-mixed-symbolic@2.svg
+│   │   │   │   ├── 󰕙 close.svg
+│   │   │   │   ├── 󰕙 cursor-handle-symbolic.svg
+│   │   │   │   ├── 󰕙 maximize.svg
+│   │   │   │   ├── 󰕙 minimize.svg
+│   │   │   │   ├── 󰕙 radio-checked-symbolic.svg
+│   │   │   │   ├── 󰕙 radio-checked-symbolic@2.svg
+│   │   │   │   ├── 󰕙 scale-horz-marks-after-slider-symbolic.svg
+│   │   │   │   ├── 󰕙 scale-horz-marks-before-slider-symbolic.svg
+│   │   │   │   ├── 󰕙 scale-slider-hover-symbolic.svg
+│   │   │   │   ├── 󰕙 scale-slider-hover-symbolic@2.svg
+│   │   │   │   ├── 󰕙 scale-slider-symbolic.svg
+│   │   │   │   ├── 󰕙 scale-slider-symbolic@2.svg
+│   │   │   │   ├── 󰕙 scale-vert-marks-after-slider-symbolic.svg
+│   │   │   │   ├── 󰕙 scale-vert-marks-before-slider-symbolic.svg
+│   │   │   │   ├── 󰕙 small-checkbox-checked-symbolic.svg
+│   │   │   │   ├── 󰕙 small-checkbox-checked-symbolic@2.svg
+│   │   │   │   ├── 󰕙 small-checkbox-mixed-symbolic.svg
+│   │   │   │   ├── 󰕙 small-checkbox-mixed-symbolic@2.svg
+│   │   │   │   ├── 󰕙 small-radio-checked-symbolic.svg
+│   │   │   │   ├── 󰕙 small-radio-checked-symbolic@2.svg
+│   │   │   │   └── 󰕙 unmaximize.svg
+│   │   │   ├──  gtk-dark.css
+│   │   │   ├──  gtk.css
+│   │   │   └──  thumbnail.png
+│   │   ├──  index.theme
+│   │   ├──  metacity-1
+│   │   │   ├──  assets
+│   │   │   │   ├── 󰕙 button.svg
+│   │   │   │   ├── 󰕙 close.svg
+│   │   │   │   ├── 󰕙 maximize.svg
+│   │   │   │   ├── 󰕙 menu.svg
+│   │   │   │   ├── 󰕙 minimize.svg
+│   │   │   │   ├── 󰕙 shade.svg
+│   │   │   │   ├── 󰕙 unmaximize.svg
+│   │   │   │   └── 󰕙 unshade.svg
+│   │   │   ├── 󰗀 metacity-theme-3.xml
+│   │   │   └──  thumbnail.png
+│   │   ├──  plank
+│   │   │   └──  dock.theme
+│   │   └──  xfwm4
+│   │       ├──  bottom-active.png
+│   │       ├──  bottom-inactive.png
+│   │       ├──  bottom-left-active.png
+│   │       ├──  bottom-left-inactive.png
+│   │       ├──  bottom-right-active.png
+│   │       ├──  bottom-right-inactive.png
+│   │       ├──  close-active.png
+│   │       ├──  close-inactive.png
+│   │       ├──  close-prelight.png
+│   │       ├──  close-pressed.png
+│   │       ├──  hide-active.png
+│   │       ├──  hide-inactive.png
+│   │       ├──  hide-prelight.png
+│   │       ├──  hide-pressed.png
+│   │       ├──  left-active.png
+│   │       ├──  left-inactive.png
+│   │       ├──  maximize-active.png
+│   │       ├──  maximize-inactive.png
+│   │       ├──  maximize-prelight.png
+│   │       ├──  maximize-pressed.png
+│   │       ├──  maximize-toggled-active.png
+│   │       ├──  maximize-toggled-inactive.png
+│   │       ├──  maximize-toggled-prelight.png
+│   │       ├──  maximize-toggled-pressed.png
+│   │       ├──  menu-active.png
+│   │       ├──  menu-inactive.png
+│   │       ├──  menu-prelight.png
+│   │       ├──  menu-pressed.png
+│   │       ├──  right-active.png
+│   │       ├──  right-inactive.png
+│   │       ├──  shade-active.png
+│   │       ├──  shade-inactive.png
+│   │       ├──  shade-prelight.png
+│   │       ├──  shade-pressed.png
+│   │       ├──  shade-toggled-active.png
+│   │       ├──  shade-toggled-inactive.png
+│   │       ├──  shade-toggled-prelight.png
+│   │       ├──  shade-toggled-pressed.png
+│   │       ├──  stick-active.png
+│   │       ├──  stick-inactive.png
+│   │       ├──  stick-prelight.png
+│   │       ├──  stick-pressed.png
+│   │       ├──  stick-toggled-active.png
+│   │       ├──  stick-toggled-inactive.png
+│   │       ├──  stick-toggled-prelight.png
+│   │       ├──  stick-toggled-pressed.png
+│   │       ├── 󰡯 themerc
+│   │       ├──  title-1-active.png
+│   │       ├──  title-1-inactive.png
+│   │       ├──  title-2-active.png
+│   │       ├──  title-2-inactive.png
+│   │       ├──  title-3-active.png
+│   │       ├──  title-3-inactive.png
+│   │       ├──  title-4-active.png
+│   │       ├──  title-4-inactive.png
+│   │       ├──  title-5-active.png
+│   │       ├──  title-5-inactive.png
+│   │       ├──  top-left-active.png
+│   │       ├──  top-left-inactive.png
+│   │       ├──  top-right-active.png
+│   │       └──  top-right-inactive.png
+│   └──  TokyoNight-Storm
+│       ├──  Tokyonight-BL-MB-Dark-Storm
+│       │   ├──  cinnamon
+│       │   │   ├──  assets
+│       │   │   │   ├── 󰕙 add-workspace-active.svg
+│       │   │   │   ├── 󰕙 add-workspace-hover.svg
+│       │   │   │   ├── 󰕙 add-workspace.svg
+│       │   │   │   ├── 󰕙 calendar-arrow-left.svg
+│       │   │   │   ├── 󰕙 calendar-arrow-right.svg
+│       │   │   │   ├── 󰕙 checkbox-dark.svg
+│       │   │   │   ├── 󰕙 checkbox-off.svg
+│       │   │   │   ├── 󰕙 checkbox.svg
+│       │   │   │   ├── 󰕙 close-active.svg
+│       │   │   │   ├── 󰕙 close-hover.svg
+│       │   │   │   ├── 󰕙 close.svg
+│       │   │   │   ├── 󰕙 corner-ripple.svg
+│       │   │   │   ├── 󰕙 radiobutton-dark.svg
+│       │   │   │   ├── 󰕙 radiobutton-off.svg
+│       │   │   │   ├── 󰕙 radiobutton.svg
+│       │   │   │   ├── 󰕙 toggle-off.svg
+│       │   │   │   ├── 󰕙 toggle-on-dark.svg
+│       │   │   │   ├── 󰕙 toggle-on.svg
+│       │   │   │   └── 󰕙 trash-icon.svg
+│       │   │   ├──  cinnamon.css
+│       │   │   └──  thumbnail.png
+│       │   ├──  gnome-shell
+│       │   │   ├──  assets
+│       │   │   │   ├── 󰕙 calendar-arrow-left.svg
+│       │   │   │   ├── 󰕙 calendar-arrow-right.svg
+│       │   │   │   ├── 󰕙 calendar-today.svg
+│       │   │   │   ├── 󰕙 checkbox-dark.svg
+│       │   │   │   ├── 󰕙 checkbox-off-active.svg
+│       │   │   │   ├── 󰕙 checkbox-off-hover.svg
+│       │   │   │   ├── 󰕙 checkbox-off.svg
+│       │   │   │   ├── 󰕙 checkbox.svg
+│       │   │   │   ├── 󰕙 dash-placeholder.svg
+│       │   │   │   ├── 󰕙 no-events.svg
+│       │   │   │   ├── 󰕙 no-notifications.svg
+│       │   │   │   ├── 󰕙 noise-texture.svg
+│       │   │   │   ├── 󰕙 process-working.svg
+│       │   │   │   ├── 󰕙 toggle-off.svg
+│       │   │   │   ├── 󰕙 toggle-on-dark.svg
+│       │   │   │   └── 󰕙 toggle-on.svg
+│       │   │   ├──  gnome-shell.css
+│       │   │   ├── 󰕙 no-events.svg -> assets/no-events.svg
+│       │   │   ├── 󰕙 no-notifications.svg -> assets/no-notifications.svg
+│       │   │   ├──  pad-osd.css
+│       │   │   └── 󰕙 process-working.svg -> assets/process-working.svg
+│       │   ├──  gtk-2.0
+│       │   │   ├──  apps.rc
+│       │   │   ├──  assets
+│       │   │   │   ├──  border.png
+│       │   │   │   ├──  button-active.png
+│       │   │   │   ├──  button-disabled.png
+│       │   │   │   ├──  button-hover.png
+│       │   │   │   ├──  button.png
+│       │   │   │   ├──  checkbox-checked-active.png
+│       │   │   │   ├──  checkbox-checked-disabled.png
+│       │   │   │   ├──  checkbox-checked-hover.png
+│       │   │   │   ├──  checkbox-checked.png
+│       │   │   │   ├──  checkbox-mixed-active.png
+│       │   │   │   ├──  checkbox-mixed-disabled.png
+│       │   │   │   ├──  checkbox-mixed-hover.png
+│       │   │   │   ├──  checkbox-mixed.png
+│       │   │   │   ├──  checkbox-unchecked-active.png
+│       │   │   │   ├──  checkbox-unchecked-disabled.png
+│       │   │   │   ├──  checkbox-unchecked-hover.png
+│       │   │   │   ├──  checkbox-unchecked.png
+│       │   │   │   ├──  combo-left-entry-active.png
+│       │   │   │   ├──  combo-left-entry-disabled.png
+│       │   │   │   ├──  combo-left-entry-hover.png
+│       │   │   │   ├──  combo-left-entry.png
+│       │   │   │   ├──  combo-right-entry-active.png
+│       │   │   │   ├──  combo-right-entry-disabled.png
+│       │   │   │   ├──  combo-right-entry-hover.png
+│       │   │   │   ├──  combo-right-entry.png
+│       │   │   │   ├──  entry-active.png
+│       │   │   │   ├──  entry-background-disabled.png
+│       │   │   │   ├──  entry-background.png
+│       │   │   │   ├──  entry-disabled.png
+│       │   │   │   ├──  entry-hover.png
+│       │   │   │   ├──  entry.png
+│       │   │   │   ├──  flat-button-active.png
+│       │   │   │   ├──  flat-button-disabled.png
+│       │   │   │   ├──  flat-button-hover.png
+│       │   │   │   ├──  flat-button.png
+│       │   │   │   ├──  focus.png
+│       │   │   │   ├──  frame-inline.png
+│       │   │   │   ├──  frame-notebook.png
+│       │   │   │   ├──  frame.png
+│       │   │   │   ├──  handle-horz-active.png
+│       │   │   │   ├──  handle-horz-hover.png
+│       │   │   │   ├──  handle-horz.png
+│       │   │   │   ├──  handle-vert-active.png
+│       │   │   │   ├──  handle-vert-hover.png
+│       │   │   │   ├──  handle-vert.png
+│       │   │   │   ├──  menu-checkbox-checked-disabled.png
+│       │   │   │   ├──  menu-checkbox-checked.png
+│       │   │   │   ├──  menu-checkbox-mixed-disabled.png
+│       │   │   │   ├──  menu-checkbox-mixed.png
+│       │   │   │   ├──  menu-checkbox-unchecked-disabled.png
+│       │   │   │   ├──  menu-checkbox-unchecked.png
+│       │   │   │   ├──  menu-radio-checked-disabled.png
+│       │   │   │   ├──  menu-radio-checked.png
+│       │   │   │   ├──  menu-radio-mixed-disabled.png
+│       │   │   │   ├──  menu-radio-mixed.png
+│       │   │   │   ├──  menu-radio-unchecked-disabled.png
+│       │   │   │   ├──  menu-radio-unchecked.png
+│       │   │   │   ├──  pan-down-alt-disabled.png
+│       │   │   │   ├──  pan-down-alt.png
+│       │   │   │   ├──  pan-down-disabled.png
+│       │   │   │   ├──  pan-down.png
+│       │   │   │   ├──  pan-left-alt-disabled.png
+│       │   │   │   ├──  pan-left-alt.png
+│       │   │   │   ├──  pan-left-disabled.png
+│       │   │   │   ├──  pan-left-semi.png
+│       │   │   │   ├──  pan-left.png
+│       │   │   │   ├──  pan-right-alt-disabled.png
+│       │   │   │   ├──  pan-right-alt.png
+│       │   │   │   ├──  pan-right-disabled.png
+│       │   │   │   ├──  pan-right-semi.png
+│       │   │   │   ├──  pan-right.png
+│       │   │   │   ├──  pan-up-alt-disabled.png
+│       │   │   │   ├──  pan-up-alt.png
+│       │   │   │   ├──  pan-up-disabled.png
+│       │   │   │   ├──  pan-up.png
+│       │   │   │   ├──  progressbar-progress.png
+│       │   │   │   ├──  progressbar-trough.png
+│       │   │   │   ├──  radio-checked-active.png
+│       │   │   │   ├──  radio-checked-disabled.png
+│       │   │   │   ├──  radio-checked-hover.png
+│       │   │   │   ├──  radio-checked.png
+│       │   │   │   ├──  radio-mixed-active.png
+│       │   │   │   ├──  radio-mixed-disabled.png
+│       │   │   │   ├──  radio-mixed-hover.png
+│       │   │   │   ├──  radio-mixed.png
+│       │   │   │   ├──  radio-unchecked-active.png
+│       │   │   │   ├──  radio-unchecked-disabled.png
+│       │   │   │   ├──  radio-unchecked-hover.png
+│       │   │   │   ├──  radio-unchecked.png
+│       │   │   │   ├──  scale-horz-trough-active.png
+│       │   │   │   ├──  scale-horz-trough-disabled.png
+│       │   │   │   ├──  scale-horz-trough.png
+│       │   │   │   ├──  scale-slider-active.png
+│       │   │   │   ├──  scale-slider-disabled.png
+│       │   │   │   ├──  scale-slider-hover.png
+│       │   │   │   ├──  scale-slider.png
+│       │   │   │   ├──  scale-vert-trough-active.png
+│       │   │   │   ├──  scale-vert-trough-disabled.png
+│       │   │   │   ├──  scale-vert-trough.png
+│       │   │   │   ├──  scrollbar-horz-slider-active.png
+│       │   │   │   ├──  scrollbar-horz-slider-disabled.png
+│       │   │   │   ├──  scrollbar-horz-slider-hover.png
+│       │   │   │   ├──  scrollbar-horz-slider.png
+│       │   │   │   ├──  scrollbar-horz-trough.png
+│       │   │   │   ├──  scrollbar-vert-ltr-slider-active.png
+│       │   │   │   ├──  scrollbar-vert-ltr-slider-disabled.png
+│       │   │   │   ├──  scrollbar-vert-ltr-slider-hover.png
+│       │   │   │   ├──  scrollbar-vert-ltr-slider.png
+│       │   │   │   ├──  scrollbar-vert-ltr-trough.png
+│       │   │   │   ├──  scrollbar-vert-rtl-slider-active.png
+│       │   │   │   ├──  scrollbar-vert-rtl-slider-disabled.png
+│       │   │   │   ├──  scrollbar-vert-rtl-slider-hover.png
+│       │   │   │   ├──  scrollbar-vert-rtl-slider.png
+│       │   │   │   ├──  scrollbar-vert-rtl-trough.png
+│       │   │   │   ├──  spin-ltr-down-active.png
+│       │   │   │   ├──  spin-ltr-down-disabled.png
+│       │   │   │   ├──  spin-ltr-down-hover.png
+│       │   │   │   ├──  spin-ltr-down.png
+│       │   │   │   ├──  spin-ltr-up-active.png
+│       │   │   │   ├──  spin-ltr-up-disabled.png
+│       │   │   │   ├──  spin-ltr-up-hover.png
+│       │   │   │   ├──  spin-ltr-up.png
+│       │   │   │   ├──  spin-rtl-down-active.png
+│       │   │   │   ├──  spin-rtl-down-disabled.png
+│       │   │   │   ├──  spin-rtl-down-hover.png
+│       │   │   │   ├──  spin-rtl-down.png
+│       │   │   │   ├──  spin-rtl-up-active.png
+│       │   │   │   ├──  spin-rtl-up-disabled.png
+│       │   │   │   ├──  spin-rtl-up-hover.png
+│       │   │   │   ├──  spin-rtl-up.png
+│       │   │   │   ├──  tab.png
+│       │   │   │   ├──  treeview-ltr-button-active.png
+│       │   │   │   ├──  treeview-ltr-button-hover.png
+│       │   │   │   ├──  treeview-ltr-button.png
+│       │   │   │   ├──  treeview-rtl-button-active.png
+│       │   │   │   ├──  treeview-rtl-button-hover.png
+│       │   │   │   └──  treeview-rtl-button.png
+│       │   │   ├──  gtkrc
+│       │   │   ├──  hacks.rc
+│       │   │   └──  main.rc
+│       │   ├──  gtk-3.0
+│       │   │   ├──  assets
+│       │   │   │   ├──  scalable
+│       │   │   │   │   ├── 󰕙 checkbox-checked-symbolic.svg
+│       │   │   │   │   ├── 󰕙 checkbox-checked-symbolic@2.svg
+│       │   │   │   │   ├── 󰕙 checkbox-mixed-symbolic.svg
+│       │   │   │   │   ├── 󰕙 checkbox-mixed-symbolic@2.svg
+│       │   │   │   │   ├── 󰕙 close.svg
+│       │   │   │   │   ├── 󰕙 cursor-handle-symbolic.svg
+│       │   │   │   │   ├── 󰕙 maximize.svg
+│       │   │   │   │   ├── 󰕙 minimize.svg
+│       │   │   │   │   ├── 󰕙 radio-checked-symbolic.svg
+│       │   │   │   │   ├── 󰕙 radio-checked-symbolic@2.svg
+│       │   │   │   │   ├── 󰕙 radio-mixed-symbolic.svg -> checkbox-mixed-symbolic.svg
+│       │   │   │   │   ├── 󰕙 radio-mixed-symbolic@2.svg -> checkbox-mixed-symbolic@2.svg
+│       │   │   │   │   ├── 󰕙 scale-horz-marks-after-slider-symbolic.svg
+│       │   │   │   │   ├── 󰕙 scale-horz-marks-before-slider-symbolic.svg
+│       │   │   │   │   ├── 󰕙 scale-slider-hover-symbolic.svg
+│       │   │   │   │   ├── 󰕙 scale-slider-hover-symbolic@2.svg
+│       │   │   │   │   ├── 󰕙 scale-slider-symbolic.svg
+│       │   │   │   │   ├── 󰕙 scale-slider-symbolic@2.svg
+│       │   │   │   │   ├── 󰕙 scale-vert-marks-after-slider-symbolic.svg
+│       │   │   │   │   ├── 󰕙 scale-vert-marks-before-slider-symbolic.svg
+│       │   │   │   │   ├── 󰕙 small-checkbox-checked-symbolic.svg
+│       │   │   │   │   ├── 󰕙 small-checkbox-checked-symbolic@2.svg
+│       │   │   │   │   ├── 󰕙 small-checkbox-mixed-symbolic.svg
+│       │   │   │   │   ├── 󰕙 small-checkbox-mixed-symbolic@2.svg
+│       │   │   │   │   ├── 󰕙 small-radio-checked-symbolic.svg
+│       │   │   │   │   ├── 󰕙 small-radio-checked-symbolic@2.svg
+│       │   │   │   │   ├── 󰕙 small-radio-mixed-symbolic.svg -> small-checkbox-mixed-symbolic.svg
+│       │   │   │   │   ├── 󰕙 small-radio-mixed-symbolic@2.svg -> small-checkbox-mixed-symbolic@2.svg
+│       │   │   │   │   └── 󰕙 unmaximize.svg
+│       │   │   │   ├──  scale-horz-marks-after-slider-dark.png
+│       │   │   │   ├──  scale-horz-marks-after-slider-dark@2.png
+│       │   │   │   ├──  scale-horz-marks-after-slider-disabled-dark.png
+│       │   │   │   ├──  scale-horz-marks-after-slider-disabled-dark@2.png
+│       │   │   │   ├──  scale-horz-marks-after-slider-disabled.png
+│       │   │   │   ├──  scale-horz-marks-after-slider-disabled@2.png
+│       │   │   │   ├──  scale-horz-marks-after-slider.png
+│       │   │   │   ├──  scale-horz-marks-after-slider@2.png
+│       │   │   │   ├──  scale-horz-marks-before-slider-dark.png
+│       │   │   │   ├──  scale-horz-marks-before-slider-dark@2.png
+│       │   │   │   ├──  scale-horz-marks-before-slider-disabled-dark.png
+│       │   │   │   ├──  scale-horz-marks-before-slider-disabled-dark@2.png
+│       │   │   │   ├──  scale-horz-marks-before-slider-disabled.png
+│       │   │   │   ├──  scale-horz-marks-before-slider-disabled@2.png
+│       │   │   │   ├──  scale-horz-marks-before-slider.png
+│       │   │   │   ├──  scale-horz-marks-before-slider@2.png
+│       │   │   │   ├──  scale-vert-marks-after-slider-dark.png
+│       │   │   │   ├──  scale-vert-marks-after-slider-dark@2.png
+│       │   │   │   ├──  scale-vert-marks-after-slider-disabled-dark.png
+│       │   │   │   ├──  scale-vert-marks-after-slider-disabled-dark@2.png
+│       │   │   │   ├──  scale-vert-marks-after-slider-disabled.png
+│       │   │   │   ├──  scale-vert-marks-after-slider-disabled@2.png
+│       │   │   │   ├──  scale-vert-marks-after-slider.png
+│       │   │   │   ├──  scale-vert-marks-after-slider@2.png
+│       │   │   │   ├──  scale-vert-marks-before-slider-dark.png
+│       │   │   │   ├──  scale-vert-marks-before-slider-dark@2.png
+│       │   │   │   ├──  scale-vert-marks-before-slider-disabled-dark.png
+│       │   │   │   ├──  scale-vert-marks-before-slider-disabled-dark@2.png
+│       │   │   │   ├──  scale-vert-marks-before-slider-disabled.png
+│       │   │   │   ├──  scale-vert-marks-before-slider-disabled@2.png
+│       │   │   │   ├──  scale-vert-marks-before-slider.png
+│       │   │   │   ├──  scale-vert-marks-before-slider@2.png
+│       │   │   │   ├──  selectionmode-checkbox-checked-dark.png
+│       │   │   │   ├──  selectionmode-checkbox-checked-dark@2.png
+│       │   │   │   ├──  selectionmode-checkbox-checked.png
+│       │   │   │   ├──  selectionmode-checkbox-checked@2.png
+│       │   │   │   ├──  selectionmode-checkbox-unchecked-dark.png
+│       │   │   │   ├──  selectionmode-checkbox-unchecked-dark@2.png
+│       │   │   │   ├──  selectionmode-checkbox-unchecked.png
+│       │   │   │   └──  selectionmode-checkbox-unchecked@2.png
+│       │   │   ├──  gtk-dark.css
+│       │   │   ├──  gtk.css
+│       │   │   └──  thumbnail.png
+│       │   ├──  gtk-4.0
+│       │   │   ├──  assets
+│       │   │   │   ├── 󰕙 checkbox-checked-symbolic.svg
+│       │   │   │   ├── 󰕙 checkbox-checked-symbolic@2.svg
+│       │   │   │   ├── 󰕙 checkbox-mixed-symbolic.svg
+│       │   │   │   ├── 󰕙 checkbox-mixed-symbolic@2.svg
+│       │   │   │   ├── 󰕙 close.svg
+│       │   │   │   ├── 󰕙 cursor-handle-symbolic.svg
+│       │   │   │   ├── 󰕙 maximize.svg
+│       │   │   │   ├── 󰕙 minimize.svg
+│       │   │   │   ├── 󰕙 radio-checked-symbolic.svg
+│       │   │   │   ├── 󰕙 radio-checked-symbolic@2.svg
+│       │   │   │   ├── 󰕙 radio-mixed-symbolic.svg -> checkbox-mixed-symbolic.svg
+│       │   │   │   ├── 󰕙 radio-mixed-symbolic@2.svg -> checkbox-mixed-symbolic@2.svg
+│       │   │   │   ├── 󰕙 scale-horz-marks-after-slider-symbolic.svg
+│       │   │   │   ├── 󰕙 scale-horz-marks-before-slider-symbolic.svg
+│       │   │   │   ├── 󰕙 scale-slider-hover-symbolic.svg
+│       │   │   │   ├── 󰕙 scale-slider-hover-symbolic@2.svg
+│       │   │   │   ├── 󰕙 scale-slider-symbolic.svg
+│       │   │   │   ├── 󰕙 scale-slider-symbolic@2.svg
+│       │   │   │   ├── 󰕙 scale-vert-marks-after-slider-symbolic.svg
+│       │   │   │   ├── 󰕙 scale-vert-marks-before-slider-symbolic.svg
+│       │   │   │   ├── 󰕙 small-checkbox-checked-symbolic.svg
+│       │   │   │   ├── 󰕙 small-checkbox-checked-symbolic@2.svg
+│       │   │   │   ├── 󰕙 small-checkbox-mixed-symbolic.svg
+│       │   │   │   ├── 󰕙 small-checkbox-mixed-symbolic@2.svg
+│       │   │   │   ├── 󰕙 small-radio-checked-symbolic.svg
+│       │   │   │   ├── 󰕙 small-radio-checked-symbolic@2.svg
+│       │   │   │   ├── 󰕙 small-radio-mixed-symbolic.svg -> small-checkbox-mixed-symbolic.svg
+│       │   │   │   ├── 󰕙 small-radio-mixed-symbolic@2.svg -> small-checkbox-mixed-symbolic@2.svg
+│       │   │   │   └── 󰕙 unmaximize.svg
+│       │   │   ├──  gtk-dark.css
+│       │   │   ├──  gtk.css
+│       │   │   └──  thumbnail.png
+│       │   ├──  index.theme
+│       │   ├──  metacity-1
+│       │   │   ├──  assets
+│       │   │   │   ├── 󰕙 button.svg
+│       │   │   │   ├── 󰕙 close.svg
+│       │   │   │   ├── 󰕙 maximize.svg
+│       │   │   │   ├── 󰕙 menu.svg
+│       │   │   │   ├── 󰕙 minimize.svg
+│       │   │   │   ├── 󰕙 shade.svg
+│       │   │   │   ├── 󰕙 unmaximize.svg
+│       │   │   │   └── 󰕙 unshade.svg
+│       │   │   ├── 󰗀 metacity-theme-1.xml -> metacity-theme-3.xml
+│       │   │   ├── 󰗀 metacity-theme-2.xml -> metacity-theme-3.xml
+│       │   │   ├── 󰗀 metacity-theme-3.xml
+│       │   │   └──  thumbnail.png
+│       │   ├──  plank
+│       │   │   └──  dock.theme
+│       │   └──  xfwm4
+│       │       ├──  bottom-active.png
+│       │       ├──  bottom-inactive.png
+│       │       ├──  bottom-left-active.png
+│       │       ├──  bottom-left-inactive.png
+│       │       ├──  bottom-right-active.png
+│       │       ├──  bottom-right-inactive.png
+│       │       ├──  close-active.png
+│       │       ├──  close-inactive.png
+│       │       ├──  close-prelight.png
+│       │       ├──  close-pressed.png
+│       │       ├──  hide-active.png
+│       │       ├──  hide-inactive.png
+│       │       ├──  hide-prelight.png
+│       │       ├──  hide-pressed.png
+│       │       ├──  left-active.png
+│       │       ├──  left-inactive.png
+│       │       ├──  maximize-active.png
+│       │       ├──  maximize-inactive.png
+│       │       ├──  maximize-prelight.png
+│       │       ├──  maximize-pressed.png
+│       │       ├──  maximize-toggled-active.png
+│       │       ├──  maximize-toggled-inactive.png
+│       │       ├──  maximize-toggled-prelight.png
+│       │       ├──  maximize-toggled-pressed.png
+│       │       ├──  menu-active.png
+│       │       ├──  menu-inactive.png
+│       │       ├──  menu-prelight.png
+│       │       ├──  menu-pressed.png
+│       │       ├──  right-active.png
+│       │       ├──  right-inactive.png
+│       │       ├──  shade-active.png
+│       │       ├──  shade-inactive.png
+│       │       ├──  shade-prelight.png
+│       │       ├──  shade-pressed.png
+│       │       ├──  shade-toggled-active.png
+│       │       ├──  shade-toggled-inactive.png
+│       │       ├──  shade-toggled-prelight.png
+│       │       ├──  shade-toggled-pressed.png
+│       │       ├──  stick-active.png
+│       │       ├──  stick-inactive.png
+│       │       ├──  stick-prelight.png
+│       │       ├──  stick-pressed.png
+│       │       ├──  stick-toggled-active.png
+│       │       ├──  stick-toggled-inactive.png
+│       │       ├──  stick-toggled-prelight.png
+│       │       ├──  stick-toggled-pressed.png
+│       │       ├── 󰡯 themerc
+│       │       ├──  title-1-active.png
+│       │       ├──  title-1-inactive.png
+│       │       ├──  title-2-active.png
+│       │       ├──  title-2-inactive.png
+│       │       ├──  title-3-active.png
+│       │       ├──  title-3-inactive.png
+│       │       ├──  title-4-active.png
+│       │       ├──  title-4-inactive.png
+│       │       ├──  title-5-active.png
+│       │       ├──  title-5-inactive.png
+│       │       ├──  top-left-active.png
+│       │       ├──  top-left-inactive.png
+│       │       ├──  top-right-active.png
+│       │       └──  top-right-inactive.png
+│       ├──  Tokyonight-BL-MB-Dark-Storm-hdpi
+│       │   └──  xfwm4
+│       │       ├──  bottom-active.png
+│       │       ├──  bottom-inactive.png
+│       │       ├──  bottom-left-active.png
+│       │       ├──  bottom-left-inactive.png
+│       │       ├──  bottom-right-active.png
+│       │       ├──  bottom-right-inactive.png
+│       │       ├──  close-active.png
+│       │       ├──  close-inactive.png
+│       │       ├──  close-prelight.png
+│       │       ├──  close-pressed.png
+│       │       ├──  hide-active.png
+│       │       ├──  hide-inactive.png
+│       │       ├──  hide-prelight.png
+│       │       ├──  hide-pressed.png
+│       │       ├──  left-active.png
+│       │       ├──  left-inactive.png
+│       │       ├──  maximize-active.png
+│       │       ├──  maximize-inactive.png
+│       │       ├──  maximize-prelight.png
+│       │       ├──  maximize-pressed.png
+│       │       ├──  maximize-toggled-active.png
+│       │       ├──  maximize-toggled-inactive.png
+│       │       ├──  maximize-toggled-prelight.png
+│       │       ├──  maximize-toggled-pressed.png
+│       │       ├──  menu-active.png
+│       │       ├──  menu-inactive.png
+│       │       ├──  menu-prelight.png
+│       │       ├──  menu-pressed.png
+│       │       ├──  right-active.png
+│       │       ├──  right-inactive.png
+│       │       ├──  shade-active.png
+│       │       ├──  shade-inactive.png
+│       │       ├──  shade-prelight.png
+│       │       ├──  shade-pressed.png
+│       │       ├──  shade-toggled-active.png
+│       │       ├──  shade-toggled-inactive.png
+│       │       ├──  shade-toggled-prelight.png
+│       │       ├──  shade-toggled-pressed.png
+│       │       ├──  stick-active.png
+│       │       ├──  stick-inactive.png
+│       │       ├──  stick-prelight.png
+│       │       ├──  stick-pressed.png
+│       │       ├──  stick-toggled-active.png
+│       │       ├──  stick-toggled-inactive.png
+│       │       ├──  stick-toggled-prelight.png
+│       │       ├──  stick-toggled-pressed.png
+│       │       ├── 󰡯 themerc
+│       │       ├──  title-1-active.png
+│       │       ├──  title-1-inactive.png
+│       │       ├──  title-2-active.png
+│       │       ├──  title-2-inactive.png
+│       │       ├──  title-3-active.png
+│       │       ├──  title-3-inactive.png
+│       │       ├──  title-4-active.png
+│       │       ├──  title-4-inactive.png
+│       │       ├──  title-5-active.png
+│       │       ├──  title-5-inactive.png
+│       │       ├──  top-left-active.png
+│       │       ├──  top-left-inactive.png
+│       │       ├──  top-right-active.png
+│       │       └──  top-right-inactive.png
+│       └──  Tokyonight-BL-MB-Dark-Storm-xhdpi
+│           └──  xfwm4
+│               ├──  bottom-active.png
+│               ├──  bottom-inactive.png
+│               ├──  bottom-left-active.png
+│               ├──  bottom-left-inactive.png
+│               ├──  bottom-right-active.png
+│               ├──  bottom-right-inactive.png
+│               ├──  close-active.png
+│               ├──  close-inactive.png
+│               ├──  close-prelight.png
+│               ├──  close-pressed.png
+│               ├──  hide-active.png
+│               ├──  hide-inactive.png
+│               ├──  hide-prelight.png
+│               ├──  hide-pressed.png
+│               ├──  left-active.png
+│               ├──  left-inactive.png
+│               ├──  maximize-active.png
+│               ├──  maximize-inactive.png
+│               ├──  maximize-prelight.png
+│               ├──  maximize-pressed.png
+│               ├──  maximize-toggled-active.png
+│               ├──  maximize-toggled-inactive.png
+│               ├──  maximize-toggled-prelight.png
+│               ├──  maximize-toggled-pressed.png
+│               ├──  menu-active.png
+│               ├──  menu-inactive.png
+│               ├──  menu-prelight.png
+│               ├──  menu-pressed.png
+│               ├──  right-active.png
+│               ├──  right-inactive.png
+│               ├──  shade-active.png
+│               ├──  shade-inactive.png
+│               ├──  shade-prelight.png
+│               ├──  shade-pressed.png
+│               ├──  shade-toggled-active.png
+│               ├──  shade-toggled-inactive.png
+│               ├──  shade-toggled-prelight.png
+│               ├──  shade-toggled-pressed.png
+│               ├──  stick-active.png
+│               ├──  stick-inactive.png
+│               ├──  stick-prelight.png
+│               ├──  stick-pressed.png
+│               ├──  stick-toggled-active.png
+│               ├──  stick-toggled-inactive.png
+│               ├──  stick-toggled-prelight.png
+│               ├──  stick-toggled-pressed.png
+│               ├── 󰡯 themerc
+│               ├──  title-1-active.png
+│               ├──  title-1-inactive.png
+│               ├──  title-2-active.png
+│               ├──  title-2-inactive.png
+│               ├──  title-3-active.png
+│               ├──  title-3-inactive.png
+│               ├──  title-4-active.png
+│               ├──  title-4-inactive.png
+│               ├──  title-5-active.png
+│               ├──  title-5-inactive.png
+│               ├──  top-left-active.png
+│               ├──  top-left-inactive.png
+│               ├──  top-right-active.png
+│               └──  top-right-inactive.png
+└──  tree.txt
