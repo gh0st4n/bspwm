@@ -92,7 +92,6 @@ menu=(
   [    Hibernate]="loginctl hibernate"
   [    Lock]="~/.config/sxhkd/scripts/lock"
   [↪   Logout]="bspc quit"
-  [    Cancel]=""
 )
 
 menu_nrows=${#menu[@]}
