@@ -5,9 +5,6 @@
 super + Return
     alacritty
 
-super + shift + Return
-    xfce4-terminal
-
 # == Rofi ==
 # Menu
 super + d
