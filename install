@@ -308,6 +308,28 @@ setup_pipewire() {
 }
 
 # ---------------------------------------------------------------------------
+setup_wireplumber() {
+    info "Configuring WirePlumber for auto-detect HDMI..."
+    
+    # Create WirePlumber config directory
+    local wp_config_dir="$CONFIG_DIR/wireplumber/wireplumber.conf.d"
+    mkdir -p "$wp_config_dir"
+    
+    # Copy custom WirePlumber config if exists
+    if [[ -f "$SCRIPT_DIR/other/pipewire/50-hdmi-auto.conf" ]]; then
+        cp "$SCRIPT_DIR/other/pipewire/50-hdmi-auto.conf" "$wp_config_dir/"
+        info "WirePlumber HDMI auto-detect config installed."
+    fi
+    
+    # Ensure audio-switch script is executable
+    if [[ -f "$CONFIG_DIR/pipewire/audio-switch" ]]; then
+        chmod +x "$CONFIG_DIR/pipewire/audio-switch"
+    fi
+    
+    success "WirePlumber configured."
+}
+
+# ---------------------------------------------------------------------------
 dotfiles() {
     info "Copying configuration files..."
     
@@ -550,6 +572,7 @@ main() {
     setup_dbus
     create_user_dirs
     setup_pipewire
+    setup_wireplumber
     dotfiles
     other
     setup_services

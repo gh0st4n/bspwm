@@ -1,58 +1,103 @@
 #!/usr/bin/env bash
-# audio-switch-minimal.sh - Simple audio toggle for PipeWire
+# audio-switch.sh - Universal audio toggle for PipeWire
+# Auto-detect sinks based on device names, not static IDs
 
-# Find your sink IDs with: wpctl status | grep -A2 "Sinks:"
-SINK_BUILTIN="44"    # Built-in audio
-SINK_HDMI="45"       # HDMI audio
+set -euo pipefail
 
-# Get current default sink
-CURRENT_SINK=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | \
-    head -n1 | grep -oE '@[0-9]+' | sed 's/@//')
-
-# Get sink name
-get_sink_name() {
-    wpctl inspect "$1" 2>/dev/null | \
-        grep "node.description" | \
-        cut -d'"' -f2 | \
-        head -n1
-}
-
-# Switch audio
-if [ "$CURRENT_SINK" = "$SINK_BUILTIN" ]; then
-    wpctl set-default "$SINK_HDMI"
-    SINK_NAME=$(get_sink_name "$SINK_HDMI")
-    notify-send -t 2000 "🔊 Audio Switch" "Switched to: $SINK_NAME"
-else
-    wpctl set-default "$SINK_BUILTIN"
-    SINK_NAME=$(get_sink_name "$SINK_BUILTIN")
-    notify-send -t 2000 "🔊 Audio Switch" "Switched to: $SINK_NAME"
-fi
-
-# Move all existing streams to new sink
-wpctl status 2>/dev/null | \
-    grep -E "^[[:space:]]*[0-9]+\.[[:space:]]*[0-9]+" | \
-    awk '{print $1}' | sed 's/\.$//' | \
-    while read -r stream; do
-        if [ "$CURRENT_SINK" = "$SINK_BUILTIN" ]; then
-            wpctl move-stream "$stream" "$SINK_HDMI" 2>/dev/null
-        else
-            wpctl move-stream "$stream" "$SINK_BUILTIN" 2>/dev/null
+# Fungsi untuk mencari sink ID berdasarkan pattern
+find_sink_by_pattern() {
+    local patterns=("$@")
+    local sink_info
+    
+    sink_info=$(wpctl status 2>/dev/null | grep -A 50 "Sinks:" | grep -E "^[[:space:]]*[0-9]+\." || true)
+    
+    for pattern in "${patterns[@]}"; do
+        local sink_id
+        sink_id=$(echo "$sink_info" | grep -i "$pattern" | head -n1 | awk '{print $1}' | tr -d '.' | sed 's/^[[:space:]]*//')
+        if [[ -n "$sink_id" ]]; then
+            echo "$sink_id"
+            return 0
         fi
     done
+    return 1
+}
 
-# Informasi
-# 1. Untuk menemukan sink ID:
-# # PipeWire
-# wpctl status | grep -A5 "Sinks:"
+# Fungsi untuk mendapatkan nama sink
+get_sink_name() {
+    local sink_id="$1"
+    wpctl inspect "$sink_id" 2>/dev/null | \
+    grep "node.description" | \
+    cut -d'"' -f2 | \
+    head -n1
+}
 
-# # Atau lebih detail:
-# wpctl inspect all | grep -A10 "Sink"
-# ---
-# wpctl status
-# # atau
-# pactl list sinks short
+# Cari sink built-in (speaker laptop)
+# Priority: Analog > Built-in > Speaker
+SINK_BUILTIN=$(find_sink_by_pattern "analog" "built-in" "speaker" "ALC" "Realtek") || true
 
-# 2. Untuk versi minimal, edit sink ID di script:
-# # Ganti nilai ini dengan sink ID Anda
-# SINK_BUILTIN="44"    # Audio built-in
-# SINK_HDMI="45"       # HDMI output
+# Cari sink HDMI/monitor
+# Priority: HDMI > Digital > DisplayPort > nama monitor
+SINK_HDMI=$(find_sink_by_pattern "hdmi" "digital" "displayport" "AQUA" "monitor" "TV") || true
+
+# Jika sink tidak ditemukan, coba switch profile soundcard
+if [[ -z "$SINK_HDMI" ]]; then
+    # Cari card yang memiliki HDMI
+    CARD_NAME=$(pactl list cards short 2>/dev/null | head -n1 | awk '{print $2}')
+    if [[ -n "$CARD_NAME" ]]; then
+        # Coba aktifkan profil HDMI
+        pactl set-card-profile "$CARD_NAME" output:hdmi-stereo+input:analog-stereo 2>/dev/null || \
+        pactl set-card-profile "$CARD_NAME" output:hdmi-stereo 2>/dev/null || true
+        sleep 0.5
+        SINK_HDMI=$(find_sink_by_pattern "hdmi" "digital" "displayport") || true
+    fi
+fi
+
+if [[ -z "$SINK_BUILTIN" ]]; then
+    CARD_NAME=$(pactl list cards short 2>/dev/null | head -n1 | awk '{print $2}')
+    if [[ -n "$CARD_NAME" ]]; then
+        pactl set-card-profile "$CARD_NAME" output:analog-stereo+input:analog-stereo 2>/dev/null || \
+        pactl set-card-profile "$CARD_NAME" output:analog-stereo 2>/dev/null || true
+        sleep 0.5
+        SINK_BUILTIN=$(find_sink_by_pattern "analog" "built-in" "speaker") || true
+    fi
+fi
+
+# Validasi: setidaknya harus ada 1 sink
+if [[ -z "$SINK_BUILTIN" && -z "$SINK_HDMI" ]]; then
+    notify-send -t 3000 "❌ Audio Switch Error" "Tidak ada audio output yang terdeteksi"
+    exit 1
+fi
+
+# Jika hanya ada 1 sink, tidak bisa toggle
+if [[ -z "$SINK_BUILTIN" || -z "$SINK_HDMI" ]]; then
+    AVAILABLE_SINK="${SINK_BUILTIN:-$SINK_HDMI}"
+    SINK_NAME=$(get_sink_name "$AVAILABLE_SINK")
+    notify-send -t 2000 "🔊 Audio" "Hanya tersedia: $SINK_NAME"
+    exit 0
+fi
+
+# Dapatkan sink default saat ini
+CURRENT_SINK=$(wpctl inspect @DEFAULT_AUDIO_SINK@ 2>/dev/null | head -n 1 | awk '{print $2}' | tr -d ',')
+
+# Tentukan target sink
+if [[ "$CURRENT_SINK" == "$SINK_BUILTIN" ]]; then
+    TARGET_SINK="$SINK_HDMI"
+else
+    TARGET_SINK="$SINK_BUILTIN"
+fi
+
+# Set default sink
+wpctl set-default "$TARGET_SINK" 2>/dev/null || true
+
+# Dapatkan nama sink target
+SINK_NAME=$(get_sink_name "$TARGET_SINK")
+
+# Pindahkan semua stream yang sedang berjalan ke sink baru
+if command -v pactl &> /dev/null; then
+    pactl list short sink-inputs 2>/dev/null | awk '{print $1}' | while read -r stream; do
+        pactl move-sink-input "$stream" "$TARGET_SINK" 2>/dev/null || true
+    done
+fi
+
+# Notifikasi
+notify-send -t 2000 "🔊 Audio Switch" "Switched to: $SINK_NAME"
